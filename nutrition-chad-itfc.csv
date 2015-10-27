@@ -1,0 +1,512 @@
+tab,title EN,title,section EN,section,type,required,concept,label EN,label,option concept,option label EN,option label,normal,subcritical,absolute,format,caption format,css class,css style,script,,NOTES,
+,,,NEXT CONCEPT ID:,,,,1777000534,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+chart,Chart,Chart,[tiles],[tiles],,,,,,,,,,,,,,,,,,#ff0000,critical
+,,,,,sparkline,,5089,Weight,Poids,,,,,,,"{1,select,<10:#.00 kg;#.0 kg}",,,,,,#ff9500,abnormal
+,,,,,number,,777000102,MUAC,MUAC,,,,,,,# mm,,"{1,select,<115:critical;<125:abnormal}",,,,#000000,normal
+,,,,,select_one,,460,Oedema,Oedeme,,,,,,,"{1,abbr}",,"{1,select,777000104:abnormal;777000105:abnormal;777000106:critical}",,,,#4CAF50,good
+,,,,,custom,,"1777000133, 1777000129",Caretaker name,Garde Malade et Village,,,,,,,"{1,text}
+{2,text}",,,,,,,
+,,,[tiles],[tiles],,,,,,,,,,,,,,,,,,,
+,,,,,number,,5088,Temperature,Temperature,,,,,,,#.0°C,,"{1,select,<35:critical;<36:abnormal;>39:critical;>37.5:abnormal}",,,,,
+,,,,,number,,5087,Heart rate,Freq. cardiaque,,,,,,,# bpm,,"{1,select,<80:critical;<90:abnormal;>180:critical;>160:abnormal}",,,,,
+,,,,,number,,5242,Respiratory rate,Freq. respiratoire,,,,,,,# bpm,,"{1,select,<20:critical;>45:critical;>40:abnormal}",,,,,
+,,,,,custom,,"999001401, 999001659",Complications,Complications,,,,,,,"{2,select,999000109:TB+;999000110:TB+;999000108:TB sus}
+{1,select,999000115:HIV+;999000114:HIV exp}",,,,,,"Diarrhea, Vomiting, HIV, TB, Malaria, Fievre Rougeole, Infection Respiratoire Haute, Infection Respiratoire Basse",
+,,,Notes,Remarques,,,,,,,,,,,,,,,,,,,
+,,,,,text_icon,yes,162169,Notes,Remarques,,,,,,,,,,,,,,
+,,,,,text_icon,,1777000129,Origin - Village,Village d'Origine,,,,,,,,,,,,,,
+,,,,,text_icon,,1777000163,Family circumstances,Circomstance Familiale,,,,,,,,,,,,,,
+,,,Anthropometrics,Anthropometrie,,,,,,,,,,,,,,,,,,,
+,,,,,number,yes,1777000111,- ANTHROPOMETRICS -,ANTHROPOMETRIE:,,,,,,,,,,,,,,
+,,,,,number,yes,5089,Weight (kg),Poids (kg),,,,,,,#.0,#.0,,height:12em,"
+function(ids, groups) {
+  var numbers = [];
+  for (var i = 0; i < groups.length; i++) {
+    var group = groups[i];
+    for (var j = 0; j < group.points.length; j++) {
+      numbers.push(group.points[j].number);
+    }
+  }
+  if (numbers.length == 0) return;
+
+  var target = null;
+  var targetGroups = data['1777000108'];
+  if (targetGroups && targetGroups.length) {
+    var lastGroup = targetGroups[targetGroups.length - 1];
+    var lastPoints = lastGroup.points;
+    target = lastPoints[lastPoints.length - 1].number;
+    numbers.push(target);
+  }
+
+  var cells = $(groups[0].cell).parent().find('td');
+  var rowHeight = cells[0].offsetHeight;
+  var rowLeft = cells[0].offsetLeft;
+  var lastCell = cells[cells.length - 1];
+  var rowRight = lastCell.offsetLeft + lastCell.offsetWidth;
+  var rowWidth = rowRight - rowLeft;
+
+  var svg = $(
+      document.createElementNS('http://www.w3.org/2000/svg', 'svg')).css({
+    'position': 'absolute',
+    'top': 0,
+    'left': 0,
+    'width': rowWidth + 'px',
+    'height': rowHeight + 'px',
+    'pointer-events': 'none'
+  });
+  var svgLeft = $(
+      document.createElementNS('http://www.w3.org/2000/svg', 'svg')).css({
+    'position': 'absolute',
+    'top': 0,
+    'right': 0,
+    'width': '100px',
+    'height': '100%',
+    'pointer-events': 'none'
+  });
+
+  var ylow = Math.floor(Math.min.apply(null, numbers));
+  var yhigh = Math.ceil(Math.max.apply(null, numbers) + 0.1);
+  var yspan = yhigh - ylow;
+
+  function getY(number) {
+    var frac = (number - ylow)/yspan;
+    return rowHeight*(0.9 - frac*0.7);
+  }
+
+  for (var gridY = ylow; gridY <= yhigh; gridY++) {
+    var y = getY(gridY);
+    svg.append($(document.createElementNS('http://www.w3.org/2000/svg', 'path')).attr({
+      'd': 'M0,' + y + ',' + rowWidth + ',' + y,
+      'stroke': 'rgba(0, 0, 0, 0.1)',
+      'stroke-width': 1,
+      'fill': 'transparent'
+    }));
+    var text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    text.appendChild(document.createTextNode(gridY));
+    // x and y cannot be set by attr(), but the rest can.
+    text.setAttribute('x', 90); // right-aligned within 100px width
+    text.setAttribute('y', y + 4);
+    svgLeft.append($(text).attr({
+      'text-anchor': 'end',
+      'font-family': 'Roboto',
+      'font-size': '1.4rem',
+      'fill': 'rgba(0, 0, 0, 0.5)',
+      'stroke-width': 0
+    }));
+  }
+
+  if (target != null) {
+    var y = getY(target);
+    svg.append($(document.createElementNS('http://www.w3.org/2000/svg', 'path')).attr({
+      'd': 'M0,' + y + ',' + rowWidth + ',' + y,
+      'stroke': '#0b0',
+      'stroke-width': 2,
+      'fill': 'transparent'
+    }));
+  }
+
+  // 5 g/kg/day trend line
+  var coords = '';
+  var initialTime = groups[0].points[0].time;
+  var initialNumber = groups[0].points[0].number;
+  var gainPerDay = 0.005 * initialNumber; // 5 g/kg
+  var gainPerMilli = gainPerDay / 86400 / 1000;
+  var number;
+  $(cells[0]).parent().find('td').each(function(i, cell) {
+    var start = +cell.dataset.start;
+    var stop = +cell.dataset.stop;
+    var cellLeft = cell.offsetLeft - rowLeft;
+    if (stop < initialTime) return;
+    if (start < initialTime) {
+      var xfrac = (initialTime - start)/(stop - start);
+      var x = cellLeft + cell.offsetWidth * xfrac;
+      coords += ',' + x + ',' + getY(initialNumber);
+      number = initialNumber + gainPerMilli * (stop - initialTime);
+      coords += ',' + (cellLeft + cell.offsetWidth) + ',' + getY(number);
+    } else {
+      number = initialNumber + gainPerMilli * (start - initialTime);
+      coords += ',' + cellLeft + ',' + getY(number);
+      number = initialNumber + gainPerMilli * (stop - initialTime);
+      coords += ',' + (cellLeft + cell.offsetWidth) + ',' + getY(number);
+    }
+  });
+  svg.append($(document.createElementNS('http://www.w3.org/2000/svg', 'path')).attr({
+    'd': 'M' + coords.substring(1),
+    'stroke': 'rgba(0, 0, 0, 0.5)',
+    'stroke-width': 1,
+    'stroke-dasharray': '2 3',
+    'fill': 'transparent'
+  }));
+  text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+  text.appendChild(document.createTextNode('+5 g/kg/d'));
+  // x and y cannot be set by attr(), but the rest can.
+  text.setAttribute('x', rowWidth - 6);
+  text.setAttribute('y', getY(number) - 6);
+  svg.append($(text).attr({
+    'text-anchor': 'end',
+    'font-family': 'Roboto',
+    'font-size': '1.4rem',
+    'fill': 'rgba(0, 0, 0, 0.5)',
+    'stroke-width': 0
+  }));
+
+  // plot the data points
+  coords = '';
+  for (var i = 0; i < groups.length; i++) {
+    var group = groups[i];
+    var xlow = group.start;
+    var xspan = group.stop - group.start;
+    for (var j = 0; j < group.points.length; j++) {
+      var xfrac = (group.points[j].time - xlow)/xspan;
+      var x = group.cell.offsetLeft - rowLeft + group.cell.offsetWidth*xfrac;
+      var y = getY(group.points[j].number);
+      var c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      // cx, cy, and r cannot be set by attr(), but fill and stroke-width can.
+      c.setAttribute('cx', x);
+      c.setAttribute('cy', y);
+      c.setAttribute('r', 3);
+      svg.append($(c).attr({
+        'fill': '#000',
+        'stroke-width': 0
+      }));
+      coords += ',' + x + ',' + y;
+    }
+  }
+  svg.append($(document.createElementNS('http://www.w3.org/2000/svg', 'path')).attr({
+    'd': 'M' + coords.substring(1),
+    'stroke': '#000',
+    'stroke-width': 2,
+    'fill': 'transparent'
+  }));
+
+  $(cells[0]).css({'position': 'relative'}).append(svg);
+  $(cells[0]).parent().find('th').css({'position': 'relative'}).append(svgLeft);
+}",,,
+,,,,,number,yes,777000102,MUAC (mm),MUAC (mm),,,,,,,,,"{1,select,<115:critical;<125:abnormal}",,,,,
+,,,,,select_one,yes,460,Oedema,Oedeme,,,,,,,,,"{1,select,777000104:abnormal;777000105:abnormal;777000106:critical}","{1,select,777000104:color:#ccc}",,,,
+,,,,Surveillance,,,,,,,,,,,,,,,,,,,
+,,,,,number,yes,1777000180,- SURVEILLANCE -,SURVEILLANCE:,,,,,,,,,,,,,,
+,,,,,number,yes,5088,Temperature (°C),Temperature (°C),,,,,,,#.0°,#.0°C,"{1,select,<35:critical;<36:abnormal;>39:critical;>37.5:abnormal}",,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,Intensive Observations,Observations intensifs - ABCC,,,,,,,,,,,,,,,,,,,
+,,,,,number,yes,1777000115,- INTENSIVE OBSERVATIONS -,OBS. INTENSIFS (ABCC):,,,,,,,,,,,,,,
+,,,,,yes_no,,777148314,Aspiration,Aspiration,,,,,,,,,"{1,yes_no,critical}",,,,,
+,,,,,number,yes,5242,Respiratory rate (bpm),Frequence Respiratoire (bpm),,,,,,,,# bpm,"{1,select,<20:critical;>45:critical;>40:abnormal}",,,,,
+,,,,,number,yes,5092,SpO_ Oxygen Sat (%),SpO_ Oxygen Sat (%),,,,,,,,,"{1,select,<95:critical}",,,,,
+,,,,,severity_bars,,1777000176,Cough,Toux,,,,,,,,,,,,,,
+,,,,,yes_no,,888143050,Cyanosis,Cyanose,,,,,,,,,,,,,,
+,,,,,yes_no,,1861,Nostril flaring,Battements de ailes du nez,,,,,,,,,,,,,,
+,,,,,yes_no,,136768,Chest indrawing,Tirage sous/inter/sus costale,,,,,,,,,,,,,,
+,,,,,number,yes,5087,Heart rate (bpm),Freq. cardiaque (bpm),,,,,,,,# bpm,"{1,select,<80:critical;<90:abnormal;>180:critical;>160:abnormal}",,,,,
+,,,,,yes_no,,777144618,Cold hands,Mains froide,,,,,,,,,,,,,,
+,,,,,select_one,,1777000177,Shock,Choc,,,,,,,"{1,select,126707:Sep;146166:Crd;137970:Hyp;1777000178:Ana}","{1,name}","{1,yes_no,critical}",,,,,
+,,,,,select_one,,1777000517,Capillary refill time (sec),Recoloration capillaire (sec),,,,,,,"{1,select,1777000518:<3;1777000519:>3}",,"{1,select,1777000519:critical}",,,,,
+,,,,,yes_no,,777124823,Weak pulse,Pouls faible,,,,,,,,,,,,,,
+,,,,,select_one,yes,162643,Consciousness (ALVPU),Etat de conscience (ALVPU),,,,,,,,,"{1,select,162645:abnormal;162644:abnormal;159508:critical}",,,,,
+,,,,,yes_no,,777000206,Convulsion,Convulsion,,,,,,,,,"{1,yes_no,critical}",,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,Intensive Observations,Observations intensifs - DE,,,,,,,,,,,,,,,,,,,
+,,,,,number,yes,1777000521,- INTENSIVE OBSERVATIONS -,OBS. INTENSIFS (DE):,,,,,,,,,,,,,,
+,,,,,number,yes,1837,Stools (24h count),Selles (episodes/24h),,,,,,,,,,,,,,
+,,,,,yes_no,,777138868,Bloody diarrhoea,Diarhee sanglante,,,,,,,,,,,,,,
+,,,,,yes_no,,777161887,Watery diarrhoea,Diarhee aqueuse,,,,,,,,,,,,,,
+,,,,,yes_no,,1777000173,Acute Watery Diarrhoea,Diarhee aqueuse aigue,,,,,,,,,,,,,,
+,,,,,number,yes,1777000520,Vomiting,Vomissements,,,,,,,,,,"{1,select,0:color:#ccc}",,,,
+,,,,,severity_bars,,1777000516,Pale conjuctiva,Conjonctive Pale,,,,,,,"{1,select,1777000190:Nml;1777000191:Pal;1777000192:Sev;}",,"{1,select,1777000192:critical}",,,,,
+,,,,,severity_bars,yes,1497,Dehydration,Deshydration,,,,,,,,,,,,,,
+,,,,,yes_no,,1777000200,Sunken eyes,Yeux enfonce,,,,,,,,,,,,,,
+,,,,,select_one,,1777000522,Skin pinch,Pli. cutane,,,,,,,"{1,select,1777000523:Rpd;1777000524:Lnt;1777000525:Prs}",,"{1,select,1777000525:critical}",,,,,
+,,,,,severity_bars,,777000007,Pain level,Douleur,,,,,,,,,,,,,,
+,,,,,yes_no,,777006023,Agitation/irritability,Agitation/irritabilitie,,,,,,,,,,,,,,
+,,,,,yes_no,,888005245,Pallor,Paleur intense,,,,,,,,,,,,,,
+,,,,,number,,1777000174,Liver flange,Rebord du foie (cm),,,,,,,,,,,,,,
+,,,Tests,Essais,,,,,,,,,,,,,,,,,,,
+,,,,,number,yes,1777000113,- TESTS -,ESSAIS:,,,,,,,,,,,,,,
+,,,,,select_one,yes,1643,Paracheck,Paracheck,,,,,,,"{1,select,703:+ve;664:-ve;1138:?;}",,"{1,select,703:critical;664:good;1138:abnormal}",,,,,
+,,,,,select_one,,32,Malaria smear test,GE (goutte epaisse),,,,,,,"{1,select,703:+ve;664:-ve;1138:?;}",,"{1,select,703:critical;664:good;1138:abnormal}",,,,,
+,,,,,number,,21,Haemoglobin (g/dL),Haemoglobine (g/dL),,,,,,,#.0,#.0,"{1,select,<4:critical;<7:abnormal}",,,,,
+,,,,,number,,1777000126,Blood sugar (mg/dL),Glycemie (mg/dL),,,,,,,,,"{1,select,<54:critical}",,,,,
+,,,Feeding,Alimentation,,,,,,,,,,,,,,,,,,,
+,,,,,number,yes,1777000117,- FEEDING -,ALIMENTATION:,,,,,,,,,,,,,,
+,,,,,select_one,yes,1777000528,Phase,Phase,,,,,,,"{1,select,1777000530:SI;1777000531:1;1777000532:T;1777000533:2}",,,,,,,
+,,,,,select_one,,888000003,Appetite test,Teste d'Appetite,,,,,,,"{1,select,888000024:P;888000025:F;888000021:R;888000022:V}",,"{1,select,888000024:good;888000025:critical;888000022:critical;888000023:critical}",,,,,
+,,,,,yes_no,,1777000162,NG Feeding,SNG,,,,,,,,,,,,,,
+,,,,,select_one,yes,1777000152,Type of Food,Type de Alimentation,,,,,,,"{1,select,1777000156:F100;1777000157:F75;1777000158:PPN}",,,,,,,
+,,,,,number,,1777000529,repas/jour,,,,,,,,,,,,,,,
+,,,,,number,,1777000159,ml/repas,ml/repas,,,,,,,,,,,,,,
+,,,,,select_one,,1777000118,Feeding 1,Alimentation 1 (9h),,,,,,,"{1,select,888000017:4/4;888000018:3/4;888000019:2/4;888000020:1/4;888000021:R;888000022:V;888000026:A;888000023:O}",,"{1,select,888000017:good;888000021:critical;888000022:critical;888000023:critical;888000026:abnormal}",,,,,
+,,,,,select_one,,1777000119,Feeding 2,Alimentation 2 (12h),,,,,,,"{1,select,888000017:4/4;888000018:3/4;888000019:2/4;888000020:1/4;888000021:R;888000022:V;888000026:A;888000023:O}",,"{1,select,888000017:good;888000021:critical;888000022:critical;888000023:critical;888000026:abnormal}",,,,,
+,,,,,select_one,,1777000120,Feeding 3,Alimentation 3 (15h),,,,,,,"{1,select,888000017:4/4;888000018:3/4;888000019:2/4;888000020:1/4;888000021:R;888000022:V;888000026:A;888000023:O}",,"{1,select,888000017:good;888000021:critical;888000022:critical;888000023:critical;888000026:abnormal}",,,,,
+,,,,,select_one,,1777000121,Feeding 4,Alimentation 4 (18h),,,,,,,"{1,select,888000017:4/4;888000018:3/4;888000019:2/4;888000020:1/4;888000021:R;888000022:V;888000026:A;888000023:O}",,"{1,select,888000017:good;888000021:critical;888000022:critical;888000023:critical;888000026:abnormal}",,,,,
+,,,,,select_one,,1777000122,Feeding 5,Alimentation 5 (21h),,,,,,,"{1,select,888000017:4/4;888000018:3/4;888000019:2/4;888000020:1/4;888000021:R;888000022:V;888000026:A;888000023:O}",,"{1,select,888000017:good;888000021:critical;888000022:critical;888000023:critical;888000026:abnormal}",,,,,
+,,,,,select_one,,1777000123,Feeding 6,Alimentation 6 (24h),,,,,,,"{1,select,888000017:4/4;888000018:3/4;888000019:2/4;888000020:1/4;888000021:R;888000022:V;888000026:A;888000023:O}",,"{1,select,888000017:good;888000021:critical;888000022:critical;888000023:critical;888000026:abnormal}",,,,,
+,,,,,select_one,,1777000124,Feeding 7,Alimentation 7 (3h),,,,,,,"{1,select,888000017:4/4;888000018:3/4;888000019:2/4;888000020:1/4;888000021:R;888000022:V;888000026:A;888000023:O}",,"{1,select,888000017:good;888000021:critical;888000022:critical;888000023:critical;888000026:abnormal}",,,,,
+,,,,,select_one,,1777000125,Feeding 8,Alimentation 8 (6h),,,,,,,"{1,select,888000017:4/4;888000018:3/4;888000019:2/4;888000020:1/4;888000021:R;888000022:V;888000026:A;888000023:O}",,"{1,select,888000017:good;888000021:critical;888000022:critical;888000023:critical;888000026:abnormal}",,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+form,Admission and History,Admision et Histoire,Origin,Origin,,,,,,,,,,,,,,,,,,,
+,,,,,text,,1777000129,Origin - Village,Village / Quartier d'Origine,,,,,,,,,,,,,,
+,,,,,text,,1777000527,Origin - Admin 4,Commune,,,,,,,,,,,,,,
+,,,,,text,,1777000132,Origin - Admin 3,Sous-prefecture,,,,,,,,,,,,,,
+,,,,,text,,1777000131,Origin - Admin 2,Department,,,,,,,,,,,,,,
+,,,,,text,,1777000130,Origin - Admin 1,Region,,,,,,,,,,,,,,
+,,,Caretaker,Garde Malade,,,,,,,,,,,,,,,,,,,
+,,,,,text,,1777000133,Caretaker name,Nom de Garde Malade,,,,,,,,,,,,,,
+,,,,,text,,1777000134,Caretaker phone,Telephone,,,,,,,,,,,,,,
+,,,Type of Admission,Type de Admission,,,,,,,,,,,,,,,,,,,
+,,,,,select_one,,1777000135,Type of patient,Type de patient,1777000136,New admission,Nouvelle admission,,,,,,,,,,,
+,,,,,,,,,,1777000138,Relapse,Rechute,,,,,,,,,,,
+,,,,,,,,,,1777000137,Readmission,Readmission,,,,,,,,,,,
+,,,,,,,,,,1777000203,Readmission within 2 months of Abandoning Treatment,Readmission Abandon < 2 mois,,,,,,,,,,,
+,,,,,,,,,,1777000139,Transfer,Transfert,,,,,,,,,,,
+,,,,,select_one,,1777000140,Transfer from,Trensfert ou Readmission de,1777000141,Abgode,Abgode,,,,,,,,,,,
+,,,,,,,,,,1777000142,Abiribiri,Abiribiri,,,,,,,,,,,
+,,,,,,,,,,1777000143,Bokoro 1 ATFC,Bokoro 1 UNTA,,,,,,,,,,,
+,,,,,,,,,,1777000202,Bokoro 2 ATFC,Bokoro 2 UNTA,,,,,,,,,,,
+,,,,,,,,,,1777000145,Dilbini,Dilbini,,,,,,,,,,,
+,,,,,,,,,,1777000146,Djokane,Djokane,,,,,,,,,,,
+,,,,,,,,,,1777000147,Gama,Gama,,,,,,,,,,,
+,,,,,,,,,,1777000148,Maigana,Maigana,,,,,,,,,,,
+,,,,,,,,,,1777000149,Moito,Moito,,,,,,,,,,,
+,,,,,,,,,,1777000150,Ouled B,Ouled B,,,,,,,,,,,
+,,,,,,,,,,1777000151,Tersete,Tersete,,,,,,,,,,,
+,,,,,,,,,,1777000144,Bokoro ITFC,Bokoro UNTI,,,,,,,,,,,
+,,,History of Disease,Histoire de la Maladie,,,,,,,,,,,,,,,,,,,
+,,,,,text,,162169,Notes,Remarques,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,Social,La circomstance familiale,,,,,,,,,,,,,,,,,,,
+,,,,,text,,1777000163,Family circumstances,Circomstance Familiale,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+form,Record Immunisations,Immunisations,,,,,,,,,,,,,,,,,,,,,
+,,,,,select_multiple,,,Immunisations given today?,Immunisations aujourd'hui?,1777000164,BCG,BCG,,,,,,,,,,,
+,,,,,,,,,,1777000165,Hep B monov,Hep B monov,,,,,,,,,,,
+,,,,,,,,,,1777000166,Polio,Polio,,,,,,,,,,,
+,,,,,,,,,,1777000167,DTP - Hep B - Hib,DTP - Hep B - Hib,,,,,,,,,,,
+,,,,,,,,,,1777000168,Measles,Rougeole,,,,,,,,,,,
+,,,,,,,,,,1777000169,Pneumo,Pneumo,,,,,,,,,,,
+,,,,,,,,,,1777000170,Yellow Fever,Fievre jaune,,,,,,,,,,,
+,,,,,,,,,,1777000171,H Influenza,H Influenza,,,,,,,,,,,
+,,,,,,,,,,1777000172,Other,Other,,,,,,,,,,,
+form,Add Anthropometrics,Ajouter Anthropometrie,Anthropometrics,Anthropometrie,,,,,,,,,,,,,,,,,,,
+,,,,,number,,5089,Weight (kg),Poids (kg),,,,,,0...250,,,,,,,,
+,,,,,number,,777000102,MUAC (mm),MUAC (mm),,,,135...500,115...500,60...500,,,,,,,,
+,,,,,select_one,,460,Oedema,Oedeme,777000103,○. None,○. Aucune,,,,,,,,,,,
+,,,,,,,,,,777000104,+. Mild (Feet or legs),+. Legere (pieds ou jambes),,,,,,,,,,,
+,,,,,,,,,,777000105,++. Moderate (Feet and legs),++. Moderee (pieds et jambes),,,,,,,,,,,
+,,,,,,,,,,777000106,"+++. Severe (Face, feet and legs)","+++. Severe (visage, pieds, et jambes)",,,,,,,,,,,
+,,,,,text,,162169,Notes,Remarques,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+form,Add Test Results,Resultats d'essais,Rapid Tests,Rapid Tests,,,,,,,,,,,,,,,,,,,
+,,,,,select_one,,1643,Malaria test result,Resultat paracheck,703,Positive,Positif,,,,,,,,,,,
+,,,,,,,,,,664,Negative,Negatif,,,,,,,,,,,
+,,,,,,,,,,1138,Indeterminate,Indeterminee,,,,,,,,,,,
+,,,,,number,,1777000126,Blood sugar (mg/dL),Glycemie (mg/dL),,,,,,,,,,,,,,
+,,,Lab Tests,Lab Tests,,,,,,,,,,,,,,,,,,,
+,,,,,number,,21,Haemoglobin (g/dL),Haemoglobine (g/dL),,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,select_one,,32,Malaria smear test,GE (goutte epaisse),703,Positive,Positif,,,,,,,,,,,
+,,,,,,,,,,664,Negative,Negatif,,,,,,,,,,,
+,,,,,,,,,,1138,Indeterminate,Indeterminee,,,,,,,,,,,
+,,,,,select_one,,300,Blood group,Blood group,690,A POSITIVE (690),,,,,,,,,,,,
+,,,,,,,,,,692,A NEGATIVE (692),,,,,,,,,,,,
+,,,,,,,,,,694,B POSITIVE (694),,,,,,,,,,,,
+,,,,,,,,,,696,B NEGATIVE (696),,,,,,,,,,,,
+,,,,,,,,,,699,O POSITIVE (699),,,,,,,,,,,,
+,,,,,,,,,,701,O NEGATIVE (701),,,,,,,,,,,,
+,,,,,,,,,,1230,AB POSITIVE (1230),,,,,,,,,,,,
+,,,,,,,,,,1231,AB NEGATIVE (1231),,,,,,,,,,,,
+,,,HIV and TB status,Status de HIV et TB,,,,,,,,,,,,,,,,,,,
+,,,,,select_one,,999001401,HIV status,Status VIH,999000111,?. Unknown,Inconnu,,,,,,,,,,,
+,,,,,,,,,,999000112,"Neg. Negative, no risk","Negatif, aucune risque",,,,,,,,,,,
+,,,,,,,,,,999000113,"Brs. Negative, still breastfeeding","Negatif, lactation",,,,,,,,,,,
+,,,,,,,,,,999000114,"Exp. Exposed, status unknown","Exposee, status inconnu",,,,,,,,,,,
+,,,,,,,,,,999000115,Pos. Infected,Positif infectee,,,,,,,,,,,
+, ,,,,select_one,,999001659,TB status,Status Tuberculose,999000107,Neg. No signs or symptoms of disease,Aucune signe ou symptome,,,,,,,,,,,
+,,,,,,,,,,999000108,Sus. Disease suspected,Suspecte,,,,,,,,,,,
+,,,,,,,,,,999000109,Pos. Disease diagnosed,Confirmee,,,,,,,,,,,
+,,,,,,,,,,999000110,Trt. On treatment for disease,Sous traitement,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+form,Add Observations,Surveillance,Surveillance,Surveillance,,,,,,,,,,,,,,,,,,,
+,,,,,select_one,,162643,Consciousness (ALVPU),Etat de conscience (ALVPU),160282,A. Alert,A. Alert,,,,,,,,,,,
+,,,,,,,,,,1777000175,L. Lethargic,L. Lethargique,,,,,,,,,,,
+,,,,,,,,,,162645,V. Responds to voice,V. Reagit a la voix,,,,,,,,,,,
+,,,,,,,,,,162644,P. Responds to pain,P. Reagit a la douleur,,,,,,,,,,,
+,,,,,,,,,,159508,U. Unresponsive,U. Pas de reponse,,,,,,,,,,,
+,,,,,number,,1837,Stools (24h count),Selles (/ jour),,,,,,,,,,,,,,
+,,,,,select_multiple,,,Any specific type of stool?,Type specifique de selles,777138868,Bloody diarrhoea,Diarrhee sanglante,,,,,,,,,,,
+,,,,,,,,,,777161887,Watery diarrhoea,Diarrhee aqueuse,,,,,,,,,,,
+,,,,,,,,,,1777000173,Acute watery diarrhoea,Diarrhee aqueuse aigue,,,,,,,,,,,
+,,,,,number,,1777000520,Vomiting,Vomissements,,,,,,,,,,,,,,
+,,,,,select_one,,1497,Dehydration,Deshydration,1107,None,Aucune,,,,,,,,,,,
+,,,,,,,,,,1498,Mild,Legere,,,,,,,,,,,
+,,,,,,,,,,1499,Moderate,Moderee,,,,,,,,,,,
+,,,,,,,,,,1500,Severe,Severe,,,,,,,,,,,
+,,,,,select_one,,1777000176,Cough,Toux,1107,None,Aucune,,,,,,,,,,,
+,,,,,,,,,,1498,Mild,Legere,,,,,,,,,,,
+,,,,,,,,,,1499,Moderate,Moderee,,,,,,,,,,,
+,,,,,,,,,,1500,Severe,Severe,,,,,,,,,,,
+,,,,,select_one,,1777000177,Shock,Choc,126707,Septic Shock,Choc septic,,,,,,,,,,,
+,,,,,,,,,,146166,Cardiogenic Shock,Choc cardiogenic,,,,,,,,,,,
+,,,,,,,,,,137970,Hypovalemic Shock,Choc hypovalemic,,,,,,,,,,,
+,,,,,,,,,,1777000178,Anaphylactic Shock,Choc anaphylactic,,,,,,,,,,,
+,,,,,select_one,,1777000517,Capillary refill time (sec),Remplissage capillaire (sec),1777000518,<3,<3,,,,,,,,,,,
+,,,,,,,,,,1777000519,>3,>3,,,,,,,,,,,
+,,,,,number,,5242,Respiratory rate (bpm),Frequence Respiratoire (bpm),,,,20...40,20...45,0...90,recent,,,,,,,
+,,,,,select_one,,1777000516,Pale conjuctiva,Conjonctive Pale,1777000190,None,Normal,,,,,,,,,,,
+,,,,,,,,,,1777000191,Pale,Pale,,,,,,,,,,,
+,,,,,,,,,,1777000192,Very Pale,Severe Pale,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,number,,5088,Temperature (°C),Temperature (°C),,,,36...37.5,36...39,30...50,,,,,,,,
+,,,,,number,,5087,Heart rate (bpm),Frequence cardiaque (bpm),,,,,,,,,,,,,,
+,,,,,number,,1777000174,Liver flange,Rebord du foie (cm),,,,,,,,,,,,,,
+,,,Additional notes,Remarques additionelles,,,,,,,,,,,,,,,,,,,
+,,,,,text,,162169,Notes,Remarques,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+form,Add Observations,Observations Intensifs,Airway,Airway,,,,,,,,,,,,,,,,,,,
+,,,,,yes_no,,777148314,Aspiration,Aspiration,,,,,,,,,,,,,,
+,,,Breathing,Breathing,,,,,,,,,,,,,,,,,,,
+,,,,,number,,5242,Respiratory rate (bpm),Freq. Respiratoire (bpm),,,,,,,,,,,,,,
+,,,,,number,,5092,SpO_ Oxygen Sat (%),SpO_ Oxygen Sat (%),,,,,,,,,,,,,,
+,,,,,yes_no,,888143050,Cyanosis,Cyanose,,,,,,,,,,,,,,
+,,,,,yes_no,,1861,Nostril flaring,Battements de ailes du nez,,,,,,,,,,,,,,
+,,,,,yes_no,,136768,Chest indrawing,Tirage sous/inter/sus costale,,,,,,,,,,,,,,
+,,,Circulation,Circulation,,,,,,,,,,,,,,,,,,,
+,,,,,number,,5087,Heart rate (bpm),Frequence cardiaque (bpm),,,,,,,,,,,,,,
+,,,,,yes_no,,777144618,Cold hands,Mains froide,,,,,,,,,,,,,,
+,,,,,select_one,,1777000517,Capillary refill time (sec),Remplissage capillaire (sec),1777000518,<3,<3,,,,,,,,,,,
+,,,,,,,,,,1777000519,>3,>3,,,,,,,,,,,
+,,,,,yes_no,,777124823,Weak pulse,Pouls faible,,,,,,,,,,,,,,
+,,,,,number,,21,Haemoglobin (g/dL),Haemoglobine (g/dL),,,,,,,,,,,,,,
+,,,Conscience,Conscience,,,,,,,,,,,,,,,,,,,
+,,,,,select_one,,162643,Consciousness (ALVPU),Etat de conscience (ALVPU),160282,A. Alert,A. Alert,,,,,,,,,,,
+,,,,,,,,,,1777000175,L. Lethargic,L. Lethargique,,,,,,,,,,,
+,,,,,,,,,,162645,V. Responds to voice,V. Reagit a la voix,,,,,,,,,,,
+,,,,,,,,,,162644,P. Responds to pain,P. Reagit a la douleur,,,,,,,,,,,
+,,,,,,,,,,159508,U. Unresponsive,U. Pas de reponse,,,,,,,,,,,
+,,,,,yes_no,,777000206,Convulsion,Convulsion,,,,,,,,,,,,,,
+,,,,,number,,1777000126,Blood sugar (mg/dL),Glycemie (mg/dL),,,,,,,,,,,,,,
+,,,Digestion,Digestion,,,,,,,,,,,,,,,,,,,
+,,,,,number,,1837,Stools (24h count),Selles (episodes/24h),,,,0...3,,,,,,,,,,
+,,,,,select_multiple,,,Any specific type of stool?,Type specifique de selles,777138868,Bloody diarrhoea,Diarrhee sanglante,,,,,,,,,,,
+,,,,,,,,,,777161887,Watery diarrhoea,Diarrhee aqueuse,,,,,,,,,,,
+,,,,,,,,,,1777000173,Acute watery diarrhoea,Diarrhee aqueuse aigue,,,,,,,,,,,
+,,,,,number,,1777000520,Vomiting,Vomissements,,,,,,,,,,,,,,
+,,,,,select_one,,1497,Dehydration,Deshydration,1107,None,Aucune,,,,,,,,,,,
+,,,,,,,,,,1498,Mild,Legere,,,,,,,,,,,
+,,,,,,,,,,1499,Moderate,Moderee,,,,,,,,,,,
+,,,,,,,,,,1500,Severe,Severe,,,,,,,,,,,
+,,,,,yes_no,,1777000200,Sunken eyes,Yeux enfonce,,,,,,,,,,,,,,
+,,,,,select_one,,1777000522,Skin pinch,Pli. cutane,1777000523,Fast,Rapide,,,,,,,,,,,
+,,,,,,,,,,1777000524,Slow,Lent,,,,,,,,,,,
+,,,,,,,,,,1777000525,Persistant,Persistant,,,,,,,,,,,
+,,,Extra,Extra,,,,,,,,,,,,,,,,,,,
+,,,,,number,,5088,Temperature (°C),Temperature (°C),,,,36...37.5,36...39,30...50,,,,,,,,
+,,,,,select_one,,777000007,Pain level,Douleur,1107,None,Aucune,,,,,,,,,,,
+,,,,,,,,,,1498,Mild,Legere,,,,,,,,,,,
+,,,,,,,,,,1499,Moderate,Moderee,,,,,,,,,,,
+,,,,,,,,,,1500,Severe,Severe,,,,,,,,,,,
+,,,,,yes_no,,777006023,Aggitation/irritability,Agitation/irritabilitie,,,,,,,,,,,,,,
+,,,,,yes_no,,888005245,Pallor,Paleur intense,,,,,,,,,,,,,,
+,,,,,select_one,,460,Oedema,Oedeme,777000103,○. None,○. Aucune,,,,,,,,,,,
+,,,,,,,,,,777000104,+. Mild (Feet or legs),+. Legere (pieds ou jambes),,,,,,,,,,,
+,,,,,,,,,,777000105,++. Moderate (Feet and legs),++. Moderee (pieds et jambes),,,,,,,,,,,
+,,,,,,,,,,777000106,"+++. Severe (Face, feet and legs)","+++. Severe (visage, pieds, et jambes)",,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+,,,Additional notes,Remarques additionelles,,,,,,,,,,,,,,,,,,,
+,,,,,text,,162169,Notes,Remarques,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+form,ITFC Feeding,UNTI Alimentation,Feeding Chart (just fill in one at a time),Grille d'Alimentation (remplisser un case a la fois),,,,,,,,,,,,,,,,,,,
+,,,,,select_one,yes,1777000528,Phase,Phase,1777000530,ICU,SI,,,,,,,,,,,
+,,,,,,,,,,1777000531,Phase I,Phase I,,,,,,,,,,,
+,,,,,,,,,,1777000532,Phase T,Phase T,,,,,,,,,,,
+,,,,,,,,,,1777000533,Phase II,Phase II,,,,,,,,,,,
+,,,,,yes_no,,1777000162,NG Feeding,SNG,,,,,,,,,,,,,,
+,,,,,select_one,,1777000152,Type of Food,Type de Alimentation,1777000156,F-100,F-100,,,,,,,,,,,
+,,,,,,,,,,1777000157,F-75,F-75,,,,,,,,,,,
+,,,,,,,,,,1777000158,PlumpyNut,PlumpyNut,,,,,,,,,,,
+,,,,,number,,1777000529,cups/day,repas/jour,,,,,,,,,,,,,,
+,,,,,number,,1777000159,ml/cup,ml/repas,,,,,,,,,,,,,,
+,,,,,select_one,,1777000118,Feeding 1,Alimentation 1 (9h),888000017,Consumed everything,Tout consomme,,,,,,,,,,,
+,,,,,,,,,,888000018,3/4,3/4,,,,,,,,,,,
+,,,,,,,,,,888000019,2/4,2/4,,,,,,,,,,,
+,,,,,,,,,,888000020,1/4,1/4,,,,,,,,,,,
+,,,,,,,,,,888000021,Rejected,Rejete,,,,,,,,,,,
+,,,,,,,,,,888000022,Vomited,Vmt,,,,,,,,,,,
+,,,,,,,,,,888000026,Away,Loin,,,,,,,,,,,
+,,,,,,,,,,888000027,PPN,PPN,,,,,,,,,,,
+,,,,,,,,,,888000023,Nothing - other reason,"Aucune, autre raison",,,,,,,,,,,
+,,,,,select_one,,1777000119,Feeding 2,Alimentation 2 (12h),888000017,Consumed everything,Tout consomme,,,,,,,,,,,
+,,,,,,,,,,888000018,3/4,3/4,,,,,,,,,,,
+,,,,,,,,,,888000019,2/4,2/4,,,,,,,,,,,
+,,,,,,,,,,888000020,1/4,1/4,,,,,,,,,,,
+,,,,,,,,,,888000021,Rejected,Rejete,,,,,,,,,,,
+,,,,,,,,,,888000022,Vomited,Vmt,,,,,,,,,,,
+,,,,,,,,,,888000026,Away,Loin,,,,,,,,,,,
+,,,,,,,,,,888000027,PPN,PPN,,,,,,,,,,,
+,,,,,,,,,,888000023,Nothing - other reason,"Aucune, autre raison",,,,,,,,,,,
+,,,,,select_one,,1777000120,Feeding 3,Alimentation 3 (15h),888000017,Consumed everything,Tout consomme,,,,,,,,,,,
+,,,,,,,,,,888000018,3/4,3/4,,,,,,,,,,,
+,,,,,,,,,,888000019,2/4,2/4,,,,,,,,,,,
+,,,,,,,,,,888000020,1/4,1/4,,,,,,,,,,,
+,,,,,,,,,,888000021,Rejected,Rejete,,,,,,,,,,,
+,,,,,,,,,,888000022,Vomited,Vmt,,,,,,,,,,,
+,,,,,,,,,,888000026,Away,Loin,,,,,,,,,,,
+,,,,,,,,,,888000027,PPN,PPN,,,,,,,,,,,
+,,,,,,,,,,888000023,Nothing - other reason,"Aucune, autre raison",,,,,,,,,,,
+,,,,,select_one,,1777000121,Feeding 4,Alimentation 4 (18h),888000017,Consumed everything,Tout consomme,,,,,,,,,,,
+,,,,,,,,,,888000018,3/4,3/4,,,,,,,,,,,
+,,,,,,,,,,888000019,2/4,2/4,,,,,,,,,,,
+,,,,,,,,,,888000020,1/4,1/4,,,,,,,,,,,
+,,,,,,,,,,888000021,Rejected,Rejete,,,,,,,,,,,
+,,,,,,,,,,888000022,Vomited,Vmt,,,,,,,,,,,
+,,,,,,,,,,888000026,Away,Loin,,,,,,,,,,,
+,,,,,,,,,,888000027,PPN,PPN,,,,,,,,,,,
+,,,,,,,,,,888000023,Nothing - other reason,"Aucune, autre raison",,,,,,,,,,,
+,,,,,select_one,,1777000122,Feeding 5,Alimentation 5 (21h),888000017,Consumed everything,Tout consomme,,,,,,,,,,,
+,,,,,,,,,,888000018,3/4,3/4,,,,,,,,,,,
+,,,,,,,,,,888000019,2/4,2/4,,,,,,,,,,,
+,,,,,,,,,,888000020,1/4,1/4,,,,,,,,,,,
+,,,,,,,,,,888000021,Rejected,Rejete,,,,,,,,,,,
+,,,,,,,,,,888000022,Vomited,Vmt,,,,,,,,,,,
+,,,,,,,,,,888000026,Away,Loin,,,,,,,,,,,
+,,,,,,,,,,888000027,PPN,PPN,,,,,,,,,,,
+,,,,,,,,,,888000023,Nothing - other reason,"Aucune, autre raison",,,,,,,,,,,
+,,,,,select_one,,1777000123,Feeding 6,Alimentation 6 (24h),888000017,Consumed everything,Tout consomme,,,,,,,,,,,
+,,,,,,,,,,888000018,3/4,3/4,,,,,,,,,,,
+,,,,,,,,,,888000019,2/4,2/4,,,,,,,,,,,
+,,,,,,,,,,888000020,1/4,1/4,,,,,,,,,,,
+,,,,,,,,,,888000021,Rejected,Rejete,,,,,,,,,,,
+,,,,,,,,,,888000022,Vomited,Vmt,,,,,,,,,,,
+,,,,,,,,,,888000026,Away,Loin,,,,,,,,,,,
+,,,,,,,,,,888000027,PPN,PPN,,,,,,,,,,,
+,,,,,,,,,,888000023,Nothing - other reason,"Aucune, autre raison",,,,,,,,,,,
+,,,,,select_one,,1777000124,Feeding 7,Alimentation 7 (3h),888000017,Consumed everything,Tout consomme,,,,,,,,,,,
+,,,,,,,,,,888000018,3/4,3/4,,,,,,,,,,,
+,,,,,,,,,,888000019,2/4,2/4,,,,,,,,,,,
+,,,,,,,,,,888000020,1/4,1/4,,,,,,,,,,,
+,,,,,,,,,,888000021,Rejected,Rejete,,,,,,,,,,,
+,,,,,,,,,,888000022,Vomited,Vmt,,,,,,,,,,,
+,,,,,,,,,,888000026,Away,Loin,,,,,,,,,,,
+,,,,,,,,,,888000027,PPN,PPN,,,,,,,,,,,
+,,,,,,,,,,888000023,Nothing - other reason,"Aucune, autre raison",,,,,,,,,,,
+,,,,,select_one,,1777000125,Feeding 8,Alimentation 8 (6h),888000017,Consumed everything,Tout consomme,,,,,,,,,,,
+,,,,,,,,,,888000018,3/4,3/4,,,,,,,,,,,
+,,,,,,,,,,888000019,2/4,2/4,,,,,,,,,,,
+,,,,,,,,,,888000020,1/4,1/4,,,,,,,,,,,
+,,,,,,,,,,888000021,Rejected,Rejete,,,,,,,,,,,
+,,,,,,,,,,888000022,Vomited,Vmt,,,,,,,,,,,
+,,,,,,,,,,888000026,Away,Loin,,,,,,,,,,,
+,,,,,,,,,,888000027,PPN,PPN,,,,,,,,,,,
+,,,,,,,,,,888000023,Nothing - other reason,"Aucune, autre raison",,,,,,,,,,,
+form,Remarques,Remarques,Section: Remarques,Section: Remarques,,,,,,,,,,,,,,,,,,,
+,,,,,text,,162169,Notes,Remarques,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,
+form,[test] Form,[Debugging form],Section headings hack until we have real headings,Section headings hack until we have real headings,,,,,,,,,,,,,,,,,,,
+,,,,,number,,1777000111,- ANTHROPOMETRICS -,ANTHROPOMETRIE:,,,,,,,,,,,,,,
+,,,,,number,,1777000180,- SURVEILLANCE -,SURVEILLANCE:,,,,,,,,,,,,,,
+,,,,,number,,1777000112,- VITALS -,SIGNES VITAUX:,,,,,,,,,,,,,,
+,,,,,number,,1777000113,- TESTS -,ESSAIS:,,,,,,,,,,,,,,
+,,,,,number,,1777000115,- INTENSIVE OBSERVATIONS -,OBS. INTENSIFS (ABCC):,,,,,,,,,,,,,,
+,,,,,number,yes,1777000521,- INTENSIVE OBSERVATIONS -,OBS. INTENSIFS (DE):,,,,,,,,,,,,,,
+,,,,,number,,1777000117,- FEEDING -,ALIMENTATION:,,,,,,,,,,,,,,
+,,,,,number,,1777000116,- [debugging section] -,- [debugging section] -,,,,,,,,,,,,,,
