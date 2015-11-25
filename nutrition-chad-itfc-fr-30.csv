@@ -229,7 +229,6 @@ chart,Chart,Chart,[tiles],[tiles],,,,,,,,,,,,,,,,,,#ff0000,critical
 ,,,Feeding,Alimentation,,,,,,,,,,,,,,,,,,,
 ,,,,,number,yes,1777000117,- FEEDING -,ALIMENTATION:,,,,,,,,,,,,,,
 ,,,,,select_one,yes,1777000528,Phase,Phase,,,,,,,"{1,select,1777000530:SI;1777000531:1;1777000532:T;1777000533:2}",,,,,,,
-,,,,,select_one,,888000003,Appetite test,Teste d'Appetite,,,,,,,"{1,select,888000024:P;888000025:F;888000021:R;888000022:V}",,"{1,select,888000024:good;888000025:critical;888000022:critical;888000023:critical}",,,,,
 ,,,,,yes_no,,1777000162,NG Feeding,SNG,,,,,,,,,,,,,,
 ,,,,,select_one,yes,1777000152,Type of Food,Type de Alimentation,,,,,,,"{1,select,1777000156:F100;1777000157:F75;1777000158:PPN}",,,,,,,
 ,,,,,number,,1777000529,repas/jour,,,,,,,,,,,,,,,
