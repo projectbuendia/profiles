@@ -22,7 +22,8 @@ function(ids, groups) {
     'left': 0,
     'width': rowWidth + 'px',
     'height': rowHeight + 'px',
-    'pointer-events': 'none'
+    'pointer-events': 'none',
+    'background': 'rgba(200,200,180,0.2)'
   });
   var svgLeft = $(
       document.createElementNS('http://www.w3.org/2000/svg', 'svg')).css({
