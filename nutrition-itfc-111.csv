@@ -6,9 +6,10 @@ function() {}",,
 ,,,777000102,number,MUAC (mm),,,,,,,# mm,,"{1,select,<115:critical;<125:abnormal}",,,,
 ,,,460,select_one,Oedema,,,,,,,"{1,abbr}",,"{1,select,777000104:abnormal;777000105:abnormal;777000106:critical}","{1,select,777000104:color:#ccc}",,,
 ,,[tiles],,,,,,,,,,,,,,,,
-,,,161602,text,Diagnosis,,,,,,,,,,,,,
-,,,777120240,text,Complications,,,,,,,,,,,,,
-,,,1777000535,text,Plan,,,,,,,,,,,,,
+,,,161602,text,Diagnosis,,,,,,,-,"{1,text}",,,,,
+,,,777120240,text,Complications,,,,,,,-,"{1,text}",,,,,
+,,,1777000535,text,Plan,,,,,,,-,"{1,text}",,,,,
+,,,1777000673,text,Reminders,,,,,,,-,"{1,text}",,,,,
 ,,Notes,,,,,,,,,,,,,,,,
 ,,,1777000528,select_one,Phase,yes,,,,,,"{1,select,1777000530:ICU;1777000531:1;1777000532:T;1777000533:2}",,,,,,
 ,,,162169,text_icon,Notes,yes,,,,,,,,,,,,
@@ -224,7 +225,109 @@ function() {}",,
 }",,
 ,,,1777000517,select_one,Capillary refill time (sec),,,,,,,"{1,select,1777000518:<3;162512:>3}","{1,select,1777000518:<3;162512:>3}","{1,select,162512:critical}",,,,
 ,,,162643,select_one,Consciousness (AVPU),yes,,,,,,,,"{1,select,162645:abnormal;162644:abnormal;159508:critical}",,,,
-,,,5088,number,Temperature (°C),yes,,,,,,#.0,#.0,"{1,select,<35:critical;<36:abnormal;>39:critical;>37.5:abnormal}",,,,
+,,,5088,number,Temperature (°C),yes,,,,,,#.0,#.0,"{1,select,<35:critical;<36:abnormal;>39:critical;>37.5:abnormal}",height:6em,"function(ids, groups) {
+  var numbers = [];
+  for (var i = 0; i < groups.length; i++) {
+    var group = groups[i];
+    for (var j = 0; j < group.points.length; j++) {
+      numbers.push(group.points[j].number);
+    }
+  }
+  if (numbers.length == 0) return;
+
+  var cells = $(groups[0].cell).parent().find('td');
+  var rowHeight = cells[0].offsetHeight;
+  var rowLeft = cells[0].offsetLeft;
+  var lastCell = cells[cells.length - 1];
+  var rowRight = lastCell.offsetLeft + lastCell.offsetWidth;
+  var rowWidth = rowRight - rowLeft;
+
+  var svg = $(
+      document.createElementNS('http://www.w3.org/2000/svg', 'svg')).css({
+    'position': 'absolute',
+    'top': 0,
+    'left': 0,
+    'width': rowWidth + 'px',
+    'height': rowHeight + 'px',
+    'pointer-events': 'none',
+    'background': 'rgba(200,200,180,0.2)'
+  });
+  var svgLeft = $(
+      document.createElementNS('http://www.w3.org/2000/svg', 'svg')).css({
+    'position': 'absolute',
+    'top': 0,
+    'right': 0,
+    'width': '100px',
+    'height': '100%',
+    'pointer-events': 'none'
+  });
+
+  var ylow = Math.floor(Math.min.apply(null, numbers));
+  var yhigh = Math.ceil(Math.max.apply(null, numbers) + 0.1);
+  var yspan = yhigh - ylow;
+  // we only want a maximum of 5 grid lines
+  var gridspacing = Math.ceil(yspan / 5);
+
+  function getY(number) {
+    var frac = (number - ylow)/yspan;
+    return rowHeight*(0.9 - frac*0.7);
+  }
+
+  for (var gridY = ylow; gridY <= yhigh; gridY+=gridspacing) {
+    var y = getY(gridY);
+    svg.append($(document.createElementNS('http://www.w3.org/2000/svg', 'path')).attr({
+      'd': 'M0,' + y + ',' + rowWidth + ',' + y,
+      'stroke': 'rgba(0, 0, 0, 0.1)',
+      'stroke-width': 1,
+      'fill': 'transparent'
+    }));
+    var text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    text.appendChild(document.createTextNode(gridY));
+    // x and y cannot be set by attr(), but the rest can.
+    text.setAttribute('x', 90); // right-aligned within 100px width
+    text.setAttribute('y', y + 4);
+    svgLeft.append($(text).attr({
+      'text-anchor': 'end',
+      'font-family': 'Roboto',
+      'font-size': '1.4rem',
+      'fill': 'rgba(0, 0, 0, 0.5)',
+      'stroke-width': 0
+    }));
+  }
+
+  // plot the data points
+  coords = '';
+  for (var i = 0; i < groups.length; i++) {
+    var group = groups[i];
+    var xlow = group.start;
+    var xspan = group.stop - group.start;
+    for (var j = 0; j < group.points.length; j++) {
+      var xfrac = (group.points[j].time - xlow)/xspan;
+      var x = group.cell.offsetLeft - rowLeft + group.cell.offsetWidth*xfrac;
+      var y = getY(group.points[j].number);
+      var c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      // cx, cy, and r cannot be set by attr(), but fill and stroke-width can.
+      c.setAttribute('cx', x);
+      c.setAttribute('cy', y);
+      c.setAttribute('r', 1);
+      svg.append($(c).attr({
+        'fill': '#000',
+        'stroke-width': 0
+      }));
+      coords += ',' + x + ',' + y;
+    }
+  }
+  // draw lines between the data points
+  svg.append($(document.createElementNS('http://www.w3.org/2000/svg', 'path')).attr({
+    'd': 'M' + coords.substring(1),
+    'stroke': '#000',
+    'stroke-width': 2,
+    'fill': 'transparent'
+  }));
+
+  $(cells[0]).css({'position': 'relative'}).append(svg);
+  $(cells[0]).parent().find('th').css({'position': 'relative'}).append(svgLeft);
+}",,
 ,,Anthropometrics,,,,,,,,,,,,,,,,
 ,,,1777000111,number,ANTHROPOMETRICS:,yes,,,,,,,,,,,,
 ,,,5089,number,Weight (kg),yes,,,,,,#.0,"{1,select,<10:#.00 kg;#.0 kg}",,height:12em,"function(ids, groups) {
@@ -501,62 +604,79 @@ function() {}",,
 ,,,1777000124,select_one,Feeding 7,,,,,,,"{1,select,888000017:4/4;888000018:3/4;888000019:2/4;888000020:1/4;888000021:R;888000022:V;888000026:A;888000023:O}",,"{1,select,888000017:good;888000021:critical;888000022:critical;888000023:critical;888000026:abnormal}",,,,
 ,,,1777000125,select_one,Feeding 8,,,,,,,"{1,select,888000017:4/4;888000018:3/4;888000019:2/4;888000020:1/4;888000021:R;888000022:V;888000026:A;888000023:O}",,"{1,select,888000017:good;888000021:critical;888000022:critical;888000023:critical;888000026:abnormal}",,,,
 ,,,,,,,,,,,,,,,,,,
-chart,Admission and History,[tiles],,,,,,,,,,,,,,,,
+chart,Admission,[tiles],,,,,,,,,,,,,,,,
 ,,,1777000129,text,Village,,,,,,,,,,,,,
 ,,,1777000527,text,Commune,,,,,,,,,,,,,
 ,,[tiles],,,,,,,,,,,,,,,,
 ,,,1777000133,text,Caretaker name,,,,,,,,,,,,,
 ,,,1777000134,text,Caretaker phone,,,,,,,,,,,,,
 ,,[tiles],,,,,,,,,,,,,,,,
-,,,1777000135,select_one,Type of patient,,,,,,,,,,,,,
-,,,1777000578,select_one,Source of admission,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,
+,,,1777000135,select_one,Type of patient,,,,,,,"{1,name}",-,,,,,
+,,,1777000578,select_one,Source of admission,,,,,,,"{1,name}",-,,,,,
 ,,[tiles],,,,,,,,,,,,,,,,
-,,,1777000587,text,Past History,,,,,,,,,,,,,
-,,,1777000588,text,Background Conditions,,,,,,,,,,,,,
+,,,1777000587,text,Past History,,,,,,,"{1,text,40}",,,,,,
+,,,1777000588,text,Background Conditions,,,,,,,"{1,text,40}",,,,,,
 ,,[tiles],,,,,,,,,,,,,,,,
 ,,,1777000589,yes_no,History of Thirst,,,,,,,,,,,,,
 ,,,1777000590,yes_no,History of Diarrhoea,,,,,,,,,,,,,
+,,[tiles],,,,,,,,,,,,,,,,
 ,,,1777000591,yes_no,History of Vomiting,,,,,,,,,,,,,
 ,,,1777000592,yes_no,History of Cough,,,,,,,,,,,,,
 ,,[tiles],,,,,,,,,,,,,,,,
 ,,,1777000593,yes_no,History of Convulsions,,,,,,,,,,,,,
 ,,,1777000594,yes_no,History of Bleeding,,,,,,,,,,,,,
+,,[tiles],,,,,,,,,,,,,,,,
 ,,,1777000595,yes_no,History of Fever,,,,,,,,,,,,,
 ,,[tiles],,,,,,,,,,,,,,,,
-,,,1777000596,text,Details of Recent History,,,,,,,,,,,,,
-,,,1777000597,select_one,Breastfeeding,,,,,,,,,,,,,
+,,,1777000596,text,Details of Recent History,,,,,,,"{1,text,40}",,,,,,
+,,,1777000597,select_one,Breastfeeding,,,,,,,"{1,name}",-,,,,,
 ,,[tiles],,,,,,,,,,,,,,,,
 ,,,1777000601,yes_no,Receiving solid food,,,,,,,,,,,,,
-,,,1777000602,text,Feeding History,,,,,,,,,,,,,"e.g. Receiving Solid food, age of introduction to solid meals, type and frequency of meals"
+,,,1777000602,text,Feeding History,,,,,,,"{1,text,40}",,,,,,"e.g. Receiving Solid food, age of introduction to solid meals, type and frequency of meals"
 ,,[tiles],,,,,,,,,,,,,,,,
-,,,1777000163,text,Family situation,,,,,,,,,,,,,"e.g. number of siblings, number of wives husband has, etc."
+,,,1777000163,text,Family situation,,,,,,,"{1,text,40}",,,,,,"e.g. number of siblings, number of wives husband has, etc."
+,,,1777000653,text,Admission Notes,,,,,,,"{1,text,40}",,,,,,
 ,,[tiles],,,,,,,,,,,,,,,,
-,,,1396,select_one,Mother's HIV Status,,,,,,,"{1,select}",,,,,,
-,,,1401,select_one,Pediatric HIV Status,,,,,,,"{1,select}",,,,,,
+,,,1396,select_one,Mother's HIV Status,,,,,,,"{1,name}",-,,,,,
+,,,1401,select_one,Pediatric HIV Status,,,,,,,"{1,name}",-,,,,,
 ,,[tiles],,,,,,,,,,,,,,,,
 ,,,124068,yes_no,Contact with TB case?,,,,,,,,,,,,,
-,,,1659,select_one,Tuberculosis disease status,,,,,,,"{1,select}",,,,,,
-,,[tiles],,,,,,,,,,,,,,,,
+,,,1659,select_one,Tuberculosis disease status,,,,,,,"{1,name}",-,,,,,
+chart,Immunisations,[tiles],,,,,,,,,,,,,,,,
 ,,,1850,yes_no,Child Health Card Shown?,,,,,,,,,,,,,
-,,,1777000603,yes_no_unknown,Mother received Tetanus vaccination,,,,,,,,,,,,,
+,,,1777000603,yes_no,Mother received Tetanus vaccination,,,,,,,,,,,,,
+,,,1777000603,custom,,,,,,,,,,,,,,
+,,,1777000603,custom,,,,,,,,,,,,,,
 ,,[tiles],,,,,,,,,,,,,,,,
+,,,1777000664,number,Measles given before,,,,,,,,,,,,,
+,,,1777000671,number,BCG given before,,,,,,,,,,,,,
+,,,1777000658,number,Hep B given before,,,,,,,,,,,,,
+,,,1777000659,number,Polio (oral) given before,,,,,,,,,,,,,
+,,[tiles],,,,,,,,,,,,,,,,
+,,,1777000660,number,Polio (inactivated) given before,,,,,,,,,,,,,
+,,,1777000661,number,DTP given before,,,,,,,,,,,,,
+,,,1777000662,number,DTP / Hep B / Hem given before,,,,,,,,,,,,,
+,,,1777000663,number,Tetanus booster given before,,,,,,,,,,,,,
+,,[tiles],,,,,,,,,,,,,,,,
+,,,1777000665,number,Pneumo given before,,,,,,,,,,,,,
+,,,1777000666,number,Yellow Fever given before,,,,,,,,,,,,,
+,,,1777000667,number,H Influenza given before,,,,,,,,,,,,,
+,,,1777000668,text,Other immunisations given before,,,,,,,,,,,,,
+,,Immunisations given in TFP,,,,,,,,,,,,,,,,
+,,,1777000670,number,IMMUNISATIONS GIVEN IN TFP:,yes,,,,,,,,,,,,
+,,,36,yes_no,Measles (1st dose),yes,,,,,,,,,,,,
+,,,1777000672,yes_no,Measles (2nd dose),yes,,,,,,,,,,,,
 ,,,886,yes_no,BCG,,,,,,,,,,,,,
 ,,,777000782,yes_no,Hep B,,,,,,,,,,,,,
 ,,,783,yes_no,Polio (oral),,,,,,,,,,,,,
 ,,,777001422,yes_no,Polio (inactivated),,,,,,,,,,,,,
-,,[tiles],,,,,,,,,,,,,,,,
 ,,,781,yes_no,DTP,,,,,,,,,,,,,
 ,,,777001685,yes_no,DTP / Hep B / Hem,,,,,,,,,,,,,
 ,,,54,yes_no,Tetanus booster,,,,,,,,,,,,,
-,,,36,yes_no,Measles (1st dose),,,,,,,,,,,,,
-,,[tiles],,,,,,,,,,,,,,,,
 ,,,777001423,yes_no,Pneumo,,,,,,,,,,,,,
 ,,,777005864,yes_no,Yellow Fever,,,,,,,,,,,,,
 ,,,777005261,yes_no,H Influenza,,,,,,,,,,,,,
-,,,777005622,#N/A,#N/A,,,,,,,,,,,,,
-,,[tiles],,,,,,,,,,,,,,,,
-,,,1777000653,text_icon,Admission Notes,,,,,,,,,,,,,
+,,,1777000669,text_icon,Other,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,
 form,Admission and History,,,,,,,,,,,,,,,,,
 ,,Origin,,,,,,,,,,,,,,,,
@@ -589,9 +709,9 @@ form,Admission and History,,,,,,,,,,,,,,,,,
 ,,,,,,,1777000595,History of Fever,,,,,,,,,,
 ,,,1777000596,text,Details of Recent History,,,,,,,,,,,,,
 ,,Feeding,,,,,,,,,,,,,,,,
-,,,1777000597,select_one,Breastfeeding,,1777000598,○. None,,,,,,,,,,
-,,,,,,,1777000599,+. Partial,,,,,,,,,,
-,,,,,,,1777000600,+++. Exclusive,,,,,,,,,,
+,,,1777000597,select_one,Breastfeeding,,1777000598,None,,,,,,,,,,
+,,,,,,,1777000599,Partially,,,,,,,,,,
+,,,,,,,1777000600,Exclusively,,,,,,,,,,
 ,,,1777000601,yes_no,Receiving solid food,,,,,,,,,,,,,
 ,,,1777000602,text,Feeding History,,,,,,,,,,,,,"e.g. Receiving Solid food, age of introduction to solid meals, type and frequency of meals"
 ,,Social,,,,,,,,,,,,,,,,
@@ -613,25 +733,26 @@ form,Admission and History,,,,,,,,,,,,,,,,,
 ,,,,,,,1663,Completed treatment for disease,,,,,,,,,,
 ,,Additional notes,,,,,,,,,,,,,,,,
 ,,,1777000653,text,Admission Notes,,,,,,,,,,,,,
-form,Immunisations,,,,,,,,,,,,,,,,,
+form,Immunisations form,,,,,,,,,,,,,,,,,
+,,Health card,,,,,,,,,,,,,,,,
 ,,,1850,yes_no,Child Health Card Shown?,,,,,,,,,,,,,
 ,,History. Number of doses of immunisation received:,,,,,,,,,,,,,,,,
-,,,1777000664,number,Measles,,,,,,,,,,,,,
-,,,1777000657,number,BCG,,,,,,,,,,,,,
-,,,1777000658,number,Hep B,,,,,,,,,,,,,
-,,,1777000659,number,Polio (oral),,,,,,,,,,,,,
-,,,1777000660,number,Polio (inactivated),,,,,,,,,,,,,
-,,,1777000661,number,DTP,,,,,,,,,,,,,
-,,,1777000662,number,DTP / Hep B / Hem,,,,,,,,,,,,,
-,,,1777000663,number,Tetanus booster,,,,,,,,,,,,,
-,,,1777000665,number,Pneumo,,,,,,,,,,,,,
-,,,1777000666,number,Yellow Fever,,,,,,,,,,,,,
-,,,1777000667,number,H Influenza,,,,,,,,,,,,,
-,,,1777000668,text,Other,,,,,,,,,,,,,
+,,,1777000664,number,Measles given before,,,,,,,,,,,,,
+,,,1777000671,number,BCG given before,,,,,,,,,,,,,
+,,,1777000658,number,Hep B given before,,,,,,,,,,,,,
+,,,1777000659,number,Polio (oral) given before,,,,,,,,,,,,,
+,,,1777000660,number,Polio (inactivated) given before,,,,,,,,,,,,,
+,,,1777000661,number,DTP given before,,,,,,,,,,,,,
+,,,1777000662,number,DTP / Hep B / Hem given before,,,,,,,,,,,,,
+,,,1777000663,number,Tetanus booster given before,,,,,,,,,,,,,
+,,,1777000665,number,Pneumo given before,,,,,,,,,,,,,
+,,,1777000666,number,Yellow Fever given before,,,,,,,,,,,,,
+,,,1777000667,number,H Influenza given before,,,,,,,,,,,,,
+,,,1777000668,text,Other immunisations given before,,,,,,,,,,,,,
 ,,Mother,,,,,,,,,,,,,,,,
-,,,1777000603,yes_no_unknown,Mother received Tetanus vaccination,,,,,,,,,,,,,
+,,,1777000603,yes_no,Mother received Tetanus vaccination,,,,,,,,,,,,,
 ,,,,select_multiple,Immunisations given in TFP,,36,Measles (1st dose),,,,,,,,,,
-,,,,,,,1777000656,Measles (2nd dose),,,,,,,,,,
+,,,,,,,1777000672,Measles (2nd dose),,,,,,,,,,
 ,,,,,,,886,BCG,,,,,,,,,,
 ,,,,,,,777000782,Hep B,,,,,,,,,,
 ,,,,,,,783,Polio (oral),,,,,,,,,,
@@ -791,6 +912,7 @@ form,Diagnosis & Plan (text),,,,,,,,,,,,,,,,,
 ,,,161602,text,Diagnosis,,,,,,,,,,,,,
 ,,,777120240,text,Complications,,,,,,,,,,,,,
 ,,,1777000535,text,Plan,,,,,,,,,,,,,
+,,,1777000673,text,Reminders,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,
 form,Diagnosis & Plan (buttons),,,,,,,,,,,,,,,,,
 ,,,,select_multiple,Diarrhoea,,1777000619,Acute watery dairrhoea (AWD),,,,,,,,,,
@@ -937,9 +1059,9 @@ form,Feeding,,,,,,,,,,,,,,,,,
 ,,,,,,,1777000531,Phase I,,,,,,,,,,
 ,,,,,,,1777000532,Phase T,,,,,,,,,,
 ,,,,,,,1777000533,Phase II,,,,,,,,,,
-,,,1777000597,select_one,Breastfeeding,,1777000598,○. None,,,,,,,,,,
-,,,,,,,1777000599,+. Partial,,,,,,,,,,
-,,,,,,,1777000600,+++. Exclusive,,,,,,,,,,
+,,,1777000597,select_one,Breastfeeding,,1777000598,None,,,,,,,,,,
+,,,,,,,1777000599,Partially,,,,,,,,,,
+,,,,,,,1777000600,Exclusively,,,,,,,,,,
 ,,,1777000162,yes_no,NG Feeding,,,,,,,,,,,,,
 ,,,1777000152,select_one,Type of Food,,1777000156,F100,,,,,,,,,,
 ,,,,,,,1777000157,F75,,,,,,,,,,
@@ -1044,3 +1166,4 @@ form,[test] Form,,,,,,,,,,,,,,,,,
 ,,,1777000545,number,LYMPHADENOPATHY:,,,,,,,,,,,,,
 ,,,1777000546,number,SPINE AND EXTERMITIES:,,,,,,,,,,,,,
 ,,,1777000547,number,SYMPTOMS:,,,,,,,,,,,,,
+,,,1777000670,number,IMMUNISATIONS GIVEN IN TFP:,,,,,,,,,,,,,
