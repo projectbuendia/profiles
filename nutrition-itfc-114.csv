@@ -126,7 +126,7 @@ function() {}",,
 ;} {35,yes_no,NOMA.
 ;} {36,yes_no,Night blindness.
 ;} {37,yes_no,Conjunctival dryness.
-;} {38,yes_no,Bitot's spots.
+;} {38,yes_no,Bitots spots.
 ;} {39,yes_no,Corneal dryness.
 ;} {40,yes_no,Keratomalacia.
 ;} {41,yes_no,Conjunctivitis.
@@ -164,7 +164,7 @@ function() {}",,
 ;} {73,yes_no,Extrapulmonary TB.
 ;} {74,yes_no,Lymph node TB.
 ;} {75,yes_no,Abdominal TB.
-;} {76,yes_no,Spinal TB (Pott’s Disease).
+;} {76,yes_no,Spinal TB (Potts Disease).
 ;} {77,yes_no,Osteo-articular TB.
 ;} {78,yes_no,Pleural effusion TB.
 ;} {79,yes_no,Pericardial TB.
