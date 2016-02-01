@@ -1,0 +1,876 @@
+tab,title,section,concept,type,label,required,persistant,option concept,option label,normal,subcritical,absolute,format,caption format,css class,css style,script,,NOTES
+chart,Patient Chart,[tiles],,,,,,,,,,,,,,,,,
+,,,5089,number,Weight (kg),,,,,,,,"{1,select,<10:#.00 kg;#.0 kg}",,,,,,
+,,,1777000108,number,Target Weight (kg),,,,,,,,"{1,select,<10:#.00 kg;#.0 kg}",,,,"// something needs to be here to make the data points for this concept accessible to javascript
+function() {}",,
+,,,777000102,number,MUAC (mm),,,,,,,,# mm,,"{1,select,<115:critical;<125:abnormal}",,,,
+,,,460,select_one,Oedema,,,,,,,,"{1,abbr}",,"{1,select,777000104:abnormal;777000105:abnormal;777000106:critical}","{1,select,777000104:color:#ccc}",,,
+,,[tiles],,,,,,,,,,,,,,,,,
+,,,"1777000619,
+1777000620,
+777138868,
+777000124,
+777139457,
+777145443,
+777122604,
+777148353,
+777119356,
+777000199,
+777113224,
+777149609,
+1777000622,
+777114431,
+777149579,
+777149716,
+1777000700,
+1777000701,
+777114100,
+777113809,
+777121392,
+777121009,
+777114190,
+121375,
+777159950,
+777160155,
+1777000645,
+1777000646,
+1777000647,
+777005334,
+777139438,
+777120755,
+777139407,
+777139437,
+1777000626,
+777115247,
+777143597,
+777147267,
+1777000627,
+777136292,
+777119905,
+777112287,
+1777000702,
+777137693,
+777150555,
+777000134,
+777124654,
+777124650,
+777000140,
+777118731,
+777148705,
+777126707,
+1777000628,
+1777000629,
+777146166,
+1777000630,
+1777000631,
+1777000632,
+777152209,
+777115886,
+777111633,
+777127990,
+777000892,
+124957,
+777127394,
+1777000633,
+777114675,
+777114702,
+777123084,
+777117152,
+1777000635,
+777115753,
+777156204,
+777111873,
+777161355,
+777111904,
+1777000636,
+777111946,
+777124033,
+777111967,
+777117825,
+777124028,
+777138571
+",custom,Diagnoses,,,,,,,,-,"{1,yes_no,Acute watery dairrhoea (AWD).
+;} {2,yes_no,Suspected Bloody Diarrhoea.
+;} {3,yes_no,Bloody diarrhoea.
+;} {4,yes_no,Suspected Amoebiasis.
+;} {5,yes_no,Suspected Giardiasis.
+;} {6,yes_no,Chronic diarrhoea (>14 days).
+;} {7,yes_no,Cholera.
+;} {8,yes_no,Ascaris.
+;} {9,yes_no,Hookworm.
+;} {10,yes_no,Other Helminths.
+;} {11,yes_no,Rhinitis.
+;} {12,yes_no,Acute otitis media.
+;} {13,yes_no,Chronic suppurative otitis media.
+;} {14,yes_no,Otitis externa.
+;} {15,yes_no,Acute Pharyngitis.
+;} {16,yes_no,Acute laryngitis.
+;} {17,yes_no, Simple LRTI.
+;} {18,yes_no, Severe LRTI.
+;} {19,yes_no, Pneumonia.
+;} {20,yes_no,Atypical pneumonia.
+;} {21,yes_no,Aspiration pneumonia.
+;} {22,yes_no,Bronchiolitis.
+;} {23,yes_no,Whooping cough (pertussis).
+;} {24,yes_no,Asthma.
+;} {25,yes_no,Simple Malaria.
+;} {26,yes_no,Severe Malaria.
+;} {27,yes_no,Mild Anaemia.
+;} {28,yes_no,Moderate Anaemia.
+;} {29,yes_no,Severe Anaemia.
+;} {30,yes_no,Oral thrush.
+;} {31,yes_no,Gingivitis.
+;} {32,yes_no,Angular stomatitis.
+;} {33,yes_no,Glossitis.
+;} {34,yes_no,Gingivostomatitis.
+;} {35,yes_no,NOMA.
+;} {36,yes_no,Night blindness.
+;} {37,yes_no,Conjunctival dryness.
+;} {38,yes_no,Bitots spots.
+;} {39,yes_no,Corneal dryness.
+;} {40,yes_no,Keratomalacia.
+;} {41,yes_no,Conjunctivitis.
+;} {42,yes_no,Trachoma.
+;} {43,yes_no,Kwashiorkor related skin lesion.
+;} {44,yes_no,Impetigo.
+;} {45,yes_no,Abcess.
+;} {46,yes_no,Cellulitis.
+;} {47,yes_no,Tinea (scalp/capitis).
+;} {48,yes_no,Tinea (body/corporis).
+;} {49,yes_no,Scabies.
+;} {50,yes_no,Eczema.
+;} {51,yes_no,Anogenital candidiasis.
+;} {52,yes_no,Septic shock.
+;} {53,yes_no,Hypovolemic shock, Dehydration.
+;} {54,yes_no,Hypovolemic shock, Bleeding.
+;} {55,yes_no,Cardiogenic shock.
+;} {56,yes_no,Anaphylactic shock.
+;} {57,yes_no,Suspected acute meningitis.
+;} {58,yes_no,Confirmed acute meningitis.
+;} {59,yes_no,Measles (uncomplicated).
+;} {60,yes_no,Measles (complicated).
+;} {61,yes_no,Urinary tract infection (UTI).
+;} {62,yes_no,Fever of unknown origin.
+;} {63,yes_no,Chickenpox.
+;} {64,yes_no,Tetanus.
+;} {65,yes_no,Rickets.
+;} {66,yes_no,Sickle cell disease.
+;} {67,yes_no,Osteomielitis.
+;} {68,yes_no,Osteoarthritis.
+;} {69,yes_no,Visceral Leishmaniasis (Kala-azar).
+;} {70,yes_no,Schistosomiasis.
+;} {71,yes_no,Pulmonary TB.
+;} {72,yes_no,Miliary TB.
+;} {73,yes_no,Extrapulmonary TB.
+;} {74,yes_no,Lymph node TB.
+;} {75,yes_no,Abdominal TB.
+;} {76,yes_no,Spinal TB (Potts Disease).
+;} {77,yes_no,Osteo-articular TB.
+;} {78,yes_no,Pleural effusion TB.
+;} {79,yes_no,Pericardial TB.
+;} {80,yes_no,TB Meningitis.
+;} {81,yes_no,Genitourinary TB.
+;} {82,yes_no,Skin TB.
+;} {83,yes_no,HIV positive.
+;}",,white-space:normal;,,,
+,,,"1497,
+
+
+
+
+777138061,
+777117326,
+113054,
+777118876,
+122983,
+777147241,
+777138099,
+150915,
+1777000637,
+777130473,
+1777000638,
+1777000639,
+1777000640,
+777135595,
+1777000641,
+1777000642
+",custom,Complications,,,,,,,,-,"{1,select,1498:Mild Dehydration.
+;1499:Moderate Dehydration.
+;1500:Severe Dehydration.
+;777137970:Hypovolemic Shock.
+} {2,yes_no,Hypoglycaemia.
+;} {3,yes_no,Hypothermia.
+;} {4,yes_no,Convulsions.
+;} {5,yes_no,Altered state of consciousness.
+;} {6,yes_no,Vomiting.
+;} {7,yes_no,Bleeding.
+;} {8,yes_no,Fluid overload.
+;} {9,yes_no,Abdominal distention.
+;} {10,yes_no,Persistent oedema.
+;} {11,yes_no,Recurrent oedema.
+;} {12,yes_no,Persistent fever.
+;} {13,yes_no,Refeeding syndrome.
+;} {14,yes_no,Difficulties with breastfeeding.
+;} {15,yes_no,Persistent lack of appetite.
+;} {16,yes_no,Inappropriate weight response.
+;} {17,yes_no,Child behavioural problems.
+;}",,,,,
+,,,1777000535,text,Plan,,,,,,,,-,"{1,text}",,,,,
+,,,1777000673,text,Reminders,,,,,,,,-,"{1,text}",,,,,
+,,Notes,,,,,,,,,,,,,,,,,
+,,,1777000528,select_one,Phase,yes,,,,,,,"{1,select,1777000530:ICU;1777000531:1;1777000532:T;1777000533:2}",,,,,,
+,,,162169,text_icon,Notes,yes,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,
+,,Anthropometrics,,,,,,,,,,,,,,,,,
+,,,1777000111,number,ANTHROPOMETRICS:,yes,,,,,,,,,,,,,
+,,,5089,number,Weight (kg),yes,,,,,,,#.0,"{1,select,<10:#.00 kg;#.0 kg}",,height:12em,"function(ids, groups) {
+  var numbers = [];
+  for (var i = 0; i < groups.length; i++) {
+    var group = groups[i];
+    for (var j = 0; j < group.points.length; j++) {
+      numbers.push(group.points[j].number);
+    }
+  }
+  if (numbers.length == 0) return;
+
+  var target = null;
+  var targetGroups = data['1777000108'];
+  if (targetGroups && targetGroups.length) {
+    var lastGroup = targetGroups[targetGroups.length - 1];
+    var lastPoints = lastGroup.points;
+    target = lastPoints[lastPoints.length - 1].number;
+    numbers.push(target);
+  }
+
+  var cells = $(groups[0].cell).parent().find('td');
+  var rowHeight = cells[0].offsetHeight;
+  var rowLeft = cells[0].offsetLeft;
+  var lastCell = cells[cells.length - 1];
+  var rowRight = lastCell.offsetLeft + lastCell.offsetWidth;
+  var rowWidth = rowRight - rowLeft;
+
+  var svg = $(
+      document.createElementNS('http://www.w3.org/2000/svg', 'svg')).css({
+    'position': 'absolute',
+    'top': 0,
+    'left': 0,
+    'width': rowWidth + 'px',
+    'height': rowHeight + 'px',
+    'pointer-events': 'none',
+    'background': 'rgba(200,200,180,0.2)'
+  });
+  var svgLeft = $(
+      document.createElementNS('http://www.w3.org/2000/svg', 'svg')).css({
+    'position': 'absolute',
+    'top': 0,
+    'right': 0,
+    'width': '100px',
+    'height': '100%',
+    'pointer-events': 'none'
+  });
+
+  var ylow = Math.floor(Math.min.apply(null, numbers));
+  var yhigh = Math.ceil(Math.max.apply(null, numbers) + 0.1);
+  var yspan = yhigh - ylow;
+  // we only want a maximum of 5 grid lines
+  var gridspacing = Math.ceil(yspan / 5);
+
+  function getY(number) {
+    var frac = (number - ylow)/yspan;
+    return rowHeight*(0.9 - frac*0.7);
+  }
+
+  for (var gridY = ylow; gridY <= yhigh; gridY+=gridspacing) {
+    var y = getY(gridY);
+    svg.append($(document.createElementNS('http://www.w3.org/2000/svg', 'path')).attr({
+      'd': 'M0,' + y + ',' + rowWidth + ',' + y,
+      'stroke': 'rgba(0, 0, 0, 0.1)',
+      'stroke-width': 1,
+      'fill': 'transparent'
+    }));
+    var text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    text.appendChild(document.createTextNode(gridY));
+    // x and y cannot be set by attr(), but the rest can.
+    text.setAttribute('x', 90); // right-aligned within 100px width
+    text.setAttribute('y', y + 4);
+    svgLeft.append($(text).attr({
+      'text-anchor': 'end',
+      'font-family': 'Roboto',
+      'font-size': '1.4rem',
+      'fill': 'rgba(0, 0, 0, 0.5)',
+      'stroke-width': 0
+    }));
+  }
+
+  if (target != null) {
+    var y = getY(target);
+    svg.append($(document.createElementNS('http://www.w3.org/2000/svg', 'path')).attr({
+      'd': 'M0,' + y + ',' + rowWidth + ',' + y,
+      'stroke': '#0b0',
+      'stroke-width': 2,
+      'fill': 'transparent'
+    }));
+  }
+
+  // 5 g/kg/day trend line
+  var coords = '';
+  var initialTime = groups[0].points[0].time;
+  var initialNumber = groups[0].points[0].number;
+  var gainPerDay = 0.005 * initialNumber; // 5 g/kg
+  var gainPerMilli = gainPerDay / 86400 / 1000;
+  var number;
+  $(cells[0]).parent().find('td').each(function(i, cell) {
+    var start = +cell.dataset.start;
+    var stop = +cell.dataset.stop;
+    var cellLeft = cell.offsetLeft - rowLeft;
+    if (stop < initialTime) return;
+    if (start < initialTime) {
+      var xfrac = (initialTime - start)/(stop - start);
+      var x = cellLeft + cell.offsetWidth * xfrac;
+      coords += ',' + x + ',' + getY(initialNumber);
+      number = initialNumber + gainPerMilli * (stop - initialTime);
+      coords += ',' + (cellLeft + cell.offsetWidth) + ',' + getY(number);
+    } else {
+      number = initialNumber + gainPerMilli * (start - initialTime);
+      coords += ',' + cellLeft + ',' + getY(number);
+      number = initialNumber + gainPerMilli * (stop - initialTime);
+      coords += ',' + (cellLeft + cell.offsetWidth) + ',' + getY(number);
+    }
+  });
+  svg.append($(document.createElementNS('http://www.w3.org/2000/svg', 'path')).attr({
+    'd': 'M' + coords.substring(1),
+    'stroke': 'rgba(0, 0, 0, 0.5)',
+    'stroke-width': 1,
+    'stroke-dasharray': '2 3',
+    'fill': 'transparent'
+  }));
+  text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+  text.appendChild(document.createTextNode('+5 g/kg/d'));
+  // x and y cannot be set by attr(), but the rest can.
+  text.setAttribute('x', rowWidth - 6);
+  text.setAttribute('y', getY(number) - 6);
+  svg.append($(text).attr({
+    'text-anchor': 'end',
+    'font-family': 'Roboto',
+    'font-size': '1.4rem',
+    'fill': 'rgba(0, 0, 0, 0.5)',
+    'stroke-width': 0
+  }));
+
+  // plot the data points
+  coords = '';
+  for (var i = 0; i < groups.length; i++) {
+    var group = groups[i];
+    var xlow = group.start;
+    var xspan = group.stop - group.start;
+    for (var j = 0; j < group.points.length; j++) {
+      var xfrac = (group.points[j].time - xlow)/xspan;
+      var x = group.cell.offsetLeft - rowLeft + group.cell.offsetWidth*xfrac;
+      var y = getY(group.points[j].number);
+      var c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      // cx, cy, and r cannot be set by attr(), but fill and stroke-width can.
+      c.setAttribute('cx', x);
+      c.setAttribute('cy', y);
+      c.setAttribute('r', 3);
+      svg.append($(c).attr({
+        'fill': '#000',
+        'stroke-width': 0
+      }));
+      coords += ',' + x + ',' + y;
+    }
+  }
+  svg.append($(document.createElementNS('http://www.w3.org/2000/svg', 'path')).attr({
+    'd': 'M' + coords.substring(1),
+    'stroke': '#000',
+    'stroke-width': 2,
+    'fill': 'transparent'
+  }));
+
+  $(cells[0]).css({'position': 'relative'}).append(svg);
+  $(cells[0]).parent().find('th').css({'position': 'relative'}).append(svgLeft);
+}",,
+,,,460,select_one,Oedema,yes,,,,,,,,,"{1,select,777000104:abnormal;777000105:abnormal;777000106:critical}","{1,select,777000104:color:#ccc}",,,
+,,,777000102,number,MUAC (mm),yes,,,,,,,,,"{1,select,<115:critical;<125:abnormal}",,,,
+,,,5090,number,Height (cm),yes,,,,,,,#,# cm,,,,,
+,,,1777000536,number,Weight for height (z-score <),yes,,,,,,,,,,,,,
+,,Vitals,,,,,,,,,,,,,,,,,
+,,,1777000112,number,VITALS:,yes,,,,,,,,,,,,,
+,,,162643,select_one,Consciousness (AVPU),yes,,,,,,,,,"{1,select,162645:abnormal;162644:abnormal;159508:critical}",,,,
+,,,5088,number,Temperature (°C),yes,,,,,,,#.0,#.0,"{1,select,<35:critical;<36:abnormal;>39:critical;>37.5:abnormal}",height:6em,,,
+,,Breathing,,,,,,,,,,,,,,,,,
+,,,1777000537,number,BREATHING:,yes,,,,,,,,,,,,,
+,,,1777000703,yes_no,Breathing normally,,,,,,,,,,,,,,
+,,,888125782,yes_no,Stridor,,,,,,,,,,,,,,
+,,,888156534,yes_no,Grunting,,,,,,,,,,,,,,
+,,,125061,yes_no,Rapid breathing,,,,,,,,,,,,,,
+,,,1861,yes_no,Nasal flaring,,,,,,,,,,,,,,
+,,,136768,yes_no,Chest indrawing,,,,,,,,,,,,,,
+,,,888127639,yes_no,Respiratory distress,,,,,,,,,,,,,,
+,,Circulation,,,,,,,,,,,,,,,,,
+,,,1777000538,number,CIRCULATION:,yes,,,,,,,,,,,,,
+,,,1777000704,yes_no,Well perfused,,,,,,,,,,,,,,
+,,,1777000649,select_one,Temp. of extremities,,,,,,,,,,,,,,
+,,,1777000650,select_one,Peripheral pulse,,,,,,,,,,,,,,
+,,,1777000517,select_one,Capillary refill time (sec),,,,,,,,,,"{1,select,162512:critical}",,,,
+,,Dehydration,,,,,,,,,,,,,,,,,
+,,,1777000540,number,DEHYDRATION:,yes,,,,,,,,,,,,,
+,,,1497,severity_bars,Dehydration level,yes,,,,,,,"{1,select,1107:○;1498:-;1499:=;1500:≡;777137970:Hyp}",,"{1,select,1500:critical;777137970:critical}",,,,
+,,,1777000680,text_icon,Dehydration signs,,,,,,,,,,,,,,
+,,"Head, Eyes and Ears",,,,,,,,,,,,,,,,,
+,,,1777000542,number,"HEAD, EYES AND EARS:",yes,,,,,,,,,,,,,
+,,,777143597,yes_no,Conjunctival dryness,,,,,,,,,,,,,,
+,,,777147267,yes_no,Bitot's spots,,,,,,,,,,,,,,
+,,,1777000572,yes_no,Corneal dryness,,,,,,,,,,,,,,
+,,,777136292,yes_no,Keratomalacia,,,,,,,,,,,,,,
+,,,1777000705,text,Anaemia signs,,,,,,,,,,,,,,
+,,Symptoms,,,,,,,,,,,,,,,,,
+,,,1777000547,number,SYMPTOMS:,yes,,,,,,,,,,,,,
+,,,1777000648,text_icon,Cough,,,,,,,,,,,,,,
+,,,1837,number,Stools (24h count),yes,,,,,,,,,,,,,
+,,,1777000520,number,Vomiting (24h count),yes,,,,,,,,,,"{1,select,0:color:#ccc}",,,
+,,,1777000706,yes_no,Fever,,,,,,,,,,,,,,
+,,,1777000560,select_one,Convulsions,,,,,,,,,,"{1,select,1777000562:critical;1777000563:critical}",,,,
+,,,1777000596,text_icon,Details of Recent History (when did they get sick? what did you do? etc.),,,,,,,,,,,,,,
+,,Tests,,,,,,,,,,,,,,,,,
+,,,1777000113,number,TEST RESULTS:,yes,,,,,,,,,,,,,
+,,,1643,select_one,Malaria RDT,yes,,,,,,,"{1,select,703:+ve;664:-ve;1138:?;}",,"{1,select,703:critical;664:good;1138:abnormal}",,,,
+,,,21,number,Haemoglobin (g/dL),,,,,,,,#.0,#.0,"{1,select,<4:critical;<7:abnormal}",,,,
+,,,1777000126,number,Blood sugar (mg/dL),,,,,,,,,,"{1,select,<57:critical;>110:critical}",,,,
+,,Feeding record,,,,,,,,,,,,,,,,,
+,,,1777000117,number,FEEDING:,yes,,,,,,,,,,,,,
+,,,888000003,select_one,Appetite test (ATFC),,,,,,,,"{1,select,888000017:Pass;888000021:Rej;888000022:Vom;888000026:Away;888000023:Other;1777000707:Anorexia}",,"{1,select,888000024:good;888000025:critical;888000022:critical;888000023:critical}",,,,
+,,,,,,,,,,,,,,,,,,,
+chart,Admission,[tiles],,,,,,,,,,,,,,,,,
+,,,1777000129,text,Village,,,,,,,,,,,,,,
+,,,1777000527,text,Commune,,,,,,,,,,,,,,
+,,[tiles],,,,,,,,,,,,,,,,,
+,,,1777000133,text,Caretaker name,,,,,,,,,,,,,,
+,,,1777000134,text,Caretaker phone,,,,,,,,,,,,,,
+,,[tiles],,,,,,,,,,,,,,,,,
+,,,1777000135,select_one,Type of patient,,,,,,,,"{1,name}",-,,,,,
+,,,1777000674,select_one,Admission criteria,,,,,,,,,,,,,,
+,,[tiles],,,,,,,,,,,,,,,,,
+,,,1777000578,select_one,Source of admission,,,,,,,,"{1,name}",-,,,,,
+,,[tiles],,,,,,,,,,,,,,,,,
+,,,1777000587,text,Past History,,,,,,,,"{1,text,40}",,,,,,
+,,,1777000588,text,Background Conditions,,,,,,,,"{1,text,40}",,,,,,
+,,[tiles],,,,,,,,,,,,,,,,,
+,,,1777000596,text,Details of Recent History (when did they get sick? what did you do? etc.),,,,,,,,"{1,text,40}",,,,,,
+,,,1777000597,select_one,Breastfeeding,,,,,,,,"{1,name}",-,,,,,
+,,[tiles],,,,,,,,,,,,,,,,,
+,,,1777000601,yes_no,Receiving solid food,,,,,,,,,,,,,,
+,,,1777000602,text,Feeding History,,,,,,,,"{1,text,40}",,,,,,"e.g. Receiving Solid food, age of introduction to solid meals, type and frequency of meals"
+,,[tiles],,,,,,,,,,,,,,,,,
+,,,1777000163,text,Family situation,,,,,,,,"{1,text,40}",,,,,,"e.g. number of siblings, number of wives husband has, etc."
+,,,1777000653,text,Admission Notes,,,,,,,,"{1,text,40}",,,,,,
+,,[tiles],,,,,,,,,,,,,,,,,
+,,,124068,yes_no_unknown,Contact with TB case?,,,,,,,,,,,,,,
+,,,1659,select_one,Tuberculosis disease status,,,,,,,,"{1,name}",-,,,,,
+,,[tiles],,,,,,,,,,,,,,,,,
+,,,1396,select_one,Mother's HIV Status,,,,,,,,"{1,name}",-,"This is ok if we clarify before that we are talking about HIV serologic status before (if not it is ""Statut serologique VIH maternel""",,,,
+,,,1401,select_one,Pediatric HIV Status,,,,,,,,"{1,name}",-,idem: Statut serologique VIH de l'enfant,,,,
+,,,,,,,,,,,,,,,,,,,
+chart,Immunisations,[tiles],,,,,,,,,,,,,,,,,
+,,,1850,yes_no,Child Health Card Shown?,,,,,,,,,,,,,,
+,,,1777000603,yes_no,Mother received Tetanus vaccination,,,,,,,,,,,,,,
+,,,1777000603,custom,,,,,,,,,,,,,,,
+,,,1777000603,custom,,,,,,,,,,,,,,,
+,,[tiles],,,,,,,,,,,,,,,,,
+,,,1777000664,number,Measles given before,,,,,,,,,,,,,,
+,,,1777000671,number,BCG given before,,,,,,,,,,,,,,
+,,,1777000658,number,Hep B given before,,,,,,,,,,,,,,
+,,,1777000659,number,Polio (oral) given before,,,,,,,,,,,,,,
+,,[tiles],,,,,,,,,,,,,,,,,
+,,,1777000660,number,Polio (inactivated) given before,,,,,,,,,,,,,,
+,,,1777000661,number,DTP given before,,,,,,,,,,,,,,
+,,,1777000662,number,DTP / Hep B / HiB given before,,,,,,,,,,,,,,
+,,,1777000663,number,Tetanus booster given before,,,,,,,,,,,,,,
+,,[tiles],,,,,,,,,,,,,,,,,
+,,,1777000665,number,Pneumo given before,,,,,,,,,,,,,,
+,,,1777000666,number,Yellow Fever given before,,,,,,,,,,,,,,
+,,,1777000667,number,H Influenza given before,,,,,,,,,,,,,,
+,,,1777000668,text,Other immunisations given before,,,,,,,,,,,,,,
+,,Immunisations given in TFP,,,,,,,,,,,,,,,,,
+,,,1777000670,number,IMMUNISATIONS GIVEN IN TFP:,yes,,,,,,,,,,,,,
+,,,36,yes_no,Measles (1st dose),yes,,,,,,,,,,,,,
+,,,1777000672,yes_no,Measles (2nd dose),yes,,,,,,,,,,,,,
+,,,886,yes_no,BCG,,,,,,,,,,,,,,
+,,,777000782,yes_no,Hep B,,,,,,,,,,,,,,
+,,,783,yes_no,Polio (oral),,,,,,,,,,,,,,
+,,,777001422,yes_no,Polio (inactivated),,,,,,,,,,,,,,
+,,,781,yes_no,DTP,,,,,,,,,,,,,,
+,,,777001685,yes_no,DTP / Hep B / HiB ,,,,,,,,,,,,,,
+,,,54,yes_no,Tetanus booster,,,,,,,,,,,,,,
+,,,777001423,yes_no,Pneumo,,,,,,,,,,,,,,
+,,,777005864,yes_no,Yellow Fever,,,,,,,,,,,,,,
+,,,777005261,yes_no,H Influenza,,,,,,,,,,,,,,
+,,,1777000669,text_icon,Other,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,
+form,01. Patient Details,,,,,,,,,,,,,,,,,,
+,,Origin,,,,,,,,,,,,,,,,,
+,,,1777000129,text,Village,,,,,,,,,,,,,,
+,,,1777000527,text,Commune,,,,,,,,,,,,,,
+,,Caretaker,,,,,,,,,,,,,,,,,
+,,,1777000133,text,Caretaker name,,,,,,,,,,,,,,
+,,,1777000134,text,Caretaker phone,,,,,,,,,,,,,,
+,,Type of Admission,,,,,,,,,,,,,,,,,
+,,,1777000135,select_one,Type of patient,,,1777000136,New admission,,,,,,,,,,
+,,,,,,,,1777000138,Relapse,,,,,,,,,,
+,,,,,,,,1777000137,Readmission,,,,,,,,,,
+,,,1777000674,select_one,Admission criteria,,,1777000675,Weight/height,,,,,,,,,,
+,,,,,,,,1777000676,MUAC,,,,,,,,,,
+,,,,,,,,1777000677,Oedema,,,,,,,,,,
+,,,,,,,,1777000678,MAM + sick,,,,,,,,,,
+,,,,,,,,1777000679,Other (write in notes),,,,,,,,,,
+,,,1777000578,select_one,Source of admission,,,1777000579,Outreach,,,,,,,,,,
+,,,,,,,,1777000580,Spontaneous,,,,,,,,,,
+,,,,,,,,1777000581,OPD,,,,,,,,,,
+,,,,,,,,1777000582,SFP,,,,,,,,,,
+,,,,,,,,1777000583,Hospital,,,,,,,,,,
+,,,,,,,,1777000584,Other NGO,,,,,,,,,,
+,,,,,,,,1777000585,Campaigns,,,,,,,,,,
+,,,,,,,,1777000586,Other (write in notes),,,,,,,,,,
+,,Additional notes,,,,,,,,,,,,,,,,,
+,,,162169,text,Notes,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,
+form,02. Add Anthropometrics,,,,,,,,,,,,,,,,,,
+,,Anthropometrics,,,,,,,,,,,,,,,,,
+,,,5089,number,Weight (kg),,,,,,,0...250,,,,,,,
+,,,5090,number,Height (cm),,,,,,,,,,,,,,
+,,,1777000536,number,Weight for height (z-score <),,,,,,,,,,,,,,
+,,,1777000108,number,Target Weight (kg),,,,,,,,,,,,,,
+,,,777000102,number,MUAC (mm),,,,,135...500,115...500,60...500,,,,,,,
+,,,460,select_one,Oedema,,,777000103,○. None,,,,,,,,,,
+,,,,,,,,777000104,+. Mild (Feet bilateral),could not change this,,,,,,,,,
+,,,,,,,,777000105,++. Moderate (Feet and legs),,,,,,,,,,
+,,,,,,,,777000106,"+++. Severe (Face, feet and legs)",,,,,,,,,,
+,,,162169,text,Notes,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,
+form,03. Vitals,,,,,,,,,,,,,,,,,,
+,,Vitals,,,,,,,,,,,,,,,,,
+,,,5088,number,Temperature (°C),,,,,,,,,,,,,,
+,,,5242,number,Respiratory rate (bpm),,,,,,,,,,,,,,
+,,,5087,number,Heart rate (bpm),,,,,,,,,,,,,,
+,,Additional notes,,,,,,,,,,,,,,,,,
+,,,162169,text,Notes,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,
+form,04. Test Results,,,,,,,,,,,,,,,,,,
+,,Rapid Tests,,,,,,,,,,,,,,,,,
+,,,1643,select_one,Malaria RDT,,,1138,Indeterminate,,,,,,,,,,
+,,,,,,,,664,Negative,,,,,,,,,,
+,,,,,,,,703,Positive,,,,,,,,,,
+,,,21,number,Haemoglobin (g/dL),,,,,,,,,,,,,,
+,,,1777000126,number,Blood sugar (mg/dL),,,,,,,,,,,,,,
+,,,162169,text,Notes,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,
+form,05. Appetite Test,,,,,,,,,,,,,,,,,,
+,,,888000003,select_one,Appetite test (ATFC),,,888000017,Passed,,,,,,,,,,
+,,,,,,,,888000021,Rejected,,,,,,,,,,
+,,,,,,,,888000022,Vomited,,,,,,,,,,
+,,,,,,,,1777000707,Anorexia,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,
+form,06. Initial Consultation,,,,,,,,,,,,,,,,,,
+,,History of Disease,,,,,,,,,,,,,,,,,
+,,,1777000587,text,Past History,,,,,,,,,,,,,,
+,,,1777000588,text,Background Conditions,,,,,,,,,,,,,,
+,,Reent History - asking care-giver,,,,,,,,,,,,,,,,,
+,,,1777000648,text,Cough,,,,,,,,,,,,,,
+,,,1837,number,Stools (24h count),,,,,,,,,,,,,,
+,,,,select_multiple,Any specific type of stool?,,,777138868,Bloody diarrhoea,,,,,,,,,,
+,,,,,,,,777161887,Watery diarrhoea,,,,,,,,,,
+,,,1777000520,number,Vomiting (24h count),,,,,,,,,,,,,,
+,,,1777000706,yes_no,Fever,,,,,,,,,,,,,,
+,,,1777000560,select_one,Convulsions,,,777000103,○. None,,,,,,,,,,
+,,,,,,,,1777000562,Foc. Focal,,,,,,,,,,
+,,,,,,,,1777000563,Gen. Generalised,,,,,,,,,,
+,,,1777000596,text,Details of Recent History (when did they get sick? what did you do? etc.),,,,,,,,,,,,,,
+,,Feeding,,,,,,,,,,,,,,,,,
+,,,1777000597,select_one,Breastfeeding,,,1777000598,No. Not breastfeeding,,,,,,,,,,
+,,,,,,,,1777000599,Prt. Partially,,,,,,,,,,
+,,,,,,,,1777000600,Ex. Exclusively,,,,,,,,,,
+,,,1777000601,yes_no,Receiving solid food,,,,,,,,,,,,,,
+,,,1777000602,text,Feeding History,,,,,,,,,,,,,,"e.g. Receiving Solid food, age of introduction to solid meals, type and frequency of meals"
+,,Social,,,,,,,,,,,,,,,,,
+,,,1777000163,text,Family situation,,,,,,,,,,,,,,"e.g. number of siblings, number of wives husband has, etc."
+,,TB status,,,,,,,,,,,,,,,,,
+,,,124068,yes_no_unknown,Contact with TB case?,,,,,,,,,,,,,,
+,,,1659,select_one,Tuberculosis disease status,,,1660,No signs or symptoms of disease,,,,,,,,,,
+,,,,,,,,142177,Disease suspected,,,,,,,,,,
+,,,,,,,,1661,Disease diagnosed,,,,,,,,,,
+,,,,,,,,1662,On treatment for disease,,,,,,,,,,
+,,,,,,,,1663,Completed treatment for disease,,,,,,,,,,
+,,HIV status,,,,,,,,,,,,,,,,,
+,,,1396,select_one,Mother's HIV Status,,,1067,Unknown,,,,,,,,,,
+,,,,,,,,664,Negative,,,,,,,,,,
+,,,,,,,,703,Positive,,,,,,,,,,
+,,,1401,select_one,Pediatric HIV Status,,,1402,"HIV status unknown, never tested",,,,,,,,,,
+,,,,,,,,1403,"HIV negative, no longer at risk",,,,,,,,,,
+,,,,,,,,1404,"HIV negative, still breastfeeding",,,,,,,,,,
+,,,,,,,,1405,"HIV exposed, status unknown",,,,,,,,,,
+,,,,,,,,1169,HIV infected,,,,,,,,,,
+,,Breathing,,,,,,,,,,,,,,,,,
+,,,1777000703,yes_no,Breathing normally,,,,,,,,,,,,,,
+,,,5242,number,Respiratory rate (bpm),,,,,,,,,,,,,,
+,,,,select_multiple,Any breathing signs?,,,888125782,Stridor,,,,,,,,,,
+,,,,,,,,888156534,Grunting,,,,,,,,,,
+,,,,,,,,125061,Rapid breathing,,,,,,,,,,
+,,,,,,,,1861,Nasal flaring,,,,,,,,,,
+,,,,,,,,136768,Chest indrawing,,,,,,,,,,
+,,,888127639,yes_no,Respiratory distress,,,,,,,,,,,,,,
+,,Circulation,,,,,,,,,,,,,,,,,
+,,,1777000704,yes_no,Well perfused,,,,,,,,,,,,,,
+,,,1777000649,select_one,Temp. of extremities,,,1115,Nml. Normal,,,,,,,,,,
+,,,,,,,,162509,Cold,,,,,,,,,,
+,,,5087,number,Heart rate (bpm),,,,,,,,,,,,,,
+,,,1777000650,select_one,Peripheral pulse,,,1777000651,Strong,,,,,,,,,,
+,,,,,,,,162510,Weak,,,,,,,,,,
+,,,,,,,,1777000652,Absent,,,,,,,,,,
+,,,1777000517,select_one,Capillary refill time (sec),,,1777000518,<3. Under 3,,,,,,,,,,
+,,,,,,,,162512,>3. More than 3,,,,,,,,,,
+,,Consciousness,,,,,,,,,,,,,,,,,
+,,,162643,select_one,Consciousness (AVPU),yes,,160282,A. Alert,,,,,,,,,,
+,,,,,,,,162645,V. Responds to voice,,,,,,,,,,
+,,,,,,,,162644,P. Responds to pain,,,,,,,,,,
+,,,,,,,,159508,U. Unresponsive,,,,,,,,,,
+,,Dehydration,,,,,,,,,,,,,,,,,
+,,,1497,select_one,Dehydration level,,,1107,○. None,,,,,,,,,,
+,,,,,,,,1498,1. Mild,,,,,,,,,,
+,,,,,,,,1499,2. Moderate,,,,,,,,,,
+,,,,,,,,1500,3. Severe,,,,,,,,,,
+,,,,,,,,777137970,Hyp. Hypovolemic Shock,,,,,,,,,,
+,,,1777000680,text,Dehydration signs,,,,,,,,,,,,,,
+,,,,select_multiple,Xerophthalmia signs,,,777143597,Conjunctival dryness,,,,,,,,,,
+,,,,,,,,777147267,Bitot's spots,,,,,,,,,,
+,,,,,,,,1777000572,Corneal dryness,,,,,,,,,,
+,,,,,,,,777136292,Keratomalacia,,,,,,,,,,
+,,,1777000705,text,Anaemia signs,,,,,,,,,,,,,,
+,,Additional notes and any other signs or symptoms,,,,,,,,,,,,,,,,,
+,,,162169,text,Notes,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,
+form,07. Follow-up Consultation,,,,,,,,,,,,,,,,,,
+,,Breathing,,,,,,,,,,,,,,,,,
+,,,1777000703,yes_no,Breathing normally,,,,,,,,,,,,,,
+,,,5242,number,Respiratory rate (bpm),,,,,,,,,,,,,,
+,,,,select_multiple,Any breathing signs?,,,888125782,Stridor,,,,,,,,,,
+,,,,,,,,888156534,Grunting,,,,,,,,,,
+,,,,,,,,125061,Rapid breathing,,,,,,,,,,
+,,,,,,,,1861,Nasal flaring,,,,,,,,,,
+,,,,,,,,136768,Chest indrawing,,,,,,,,,,
+,,,888127639,yes_no,Respiratory distress,,,,,,,,,,,,,,
+,,Circulation,,,,,,,,,,,,,,,,,
+,,,1777000704,yes_no,Well perfused,,,,,,,,,,,,,,
+,,,1777000649,select_one,Temp. of extremities,,,1115,Nml. Normal,,,,,,,,,,
+,,,,,,,,162509,Cold,,,,,,,,,,
+,,,5087,number,Heart rate (bpm),,,,,,,,,,,,,,
+,,,1777000650,select_one,Peripheral pulse,,,1777000651,Strong,,,,,,,,,,
+,,,,,,,,162510,Weak,,,,,,,,,,
+,,,,,,,,1777000652,Absent,,,,,,,,,,
+,,,1777000517,select_one,Capillary refill time (sec),,,1777000518,<3. Under 3,,,,,,,,,,
+,,,,,,,,162512,>3. More than 3,,,,,,,,,,
+,,Consciousness,,,,,,,,,,,,,,,,,
+,,,162643,select_one,Consciousness (AVPU),yes,,160282,A. Alert,,,,,,,,,,
+,,,,,,,,162645,V. Responds to voice,,,,,,,,,,
+,,,,,,,,162644,P. Responds to pain,,,,,,,,,,
+,,,,,,,,159508,U. Unresponsive,,,,,,,,,,
+,,Dehydration,,,,,,,,,,,,,,,,,
+,,,1497,select_one,Dehydration level,,,1107,○. None,,,,,,,,,,
+,,,,,,,,1498,1. Mild,,,,,,,,,,
+,,,,,,,,1499,2. Moderate,,,,,,,,,,
+,,,,,,,,1500,3. Severe,,,,,,,,,,
+,,,,,,,,777137970,Hyp. Hypovolemic Shock,,,,,,,,,,
+,,,1777000680,text,Dehydration signs,,,,,,,,,,,,,,
+,,,,select_multiple,Xerophthalmia signs,,,777143597,Conjunctival dryness,,,,,,,,,,
+,,,,,,,,777147267,Bitot's spots,,,,,,,,,,
+,,,,,,,,1777000572,Corneal dryness,,,,,,,,,,
+,,,,,,,,777136292,Keratomalacia,,,,,,,,,,
+,,,1777000705,text,Anaemia signs,,,,,,,,,,,,,,
+,,Reent History - asking care-giver,,,,,,,,,,,,,,,,,
+,,,1777000648,text,Cough,,,,,,,,,,,,,,
+,,,1837,number,Stools (24h count),,,,,,,,,,,,,,
+,,,,select_multiple,Any specific type of stool?,,,777138868,Bloody diarrhoea,,,,,,,,,,
+,,,,,,,,777161887,Watery diarrhoea,,,,,,,,,,
+,,,1777000520,number,Vomiting (24h count),,,,,,,,,,,,,,
+,,,1777000706,yes_no,Fever,,,,,,,,,,,,,,
+,,,1777000560,select_one,Convulsions,,,777000103,○. None,,,,,,,,,,
+,,,,,,,,1777000562,Foc. Focal,,,,,,,,,,
+,,,,,,,,1777000563,Gen. Generalised,,,,,,,,,,
+,,Additional notes and any other signs or symptoms,,,,,,,,,,,,,,,,,
+,,,162169,text,Notes,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,
+form,08. Diagnosis & Plan,,,,,,,,,,,,,,,,,,
+,,,,select_multiple,Diarrhoea,,,1777000619,Acute watery diarrhoea (AWD),,,,,,,,,,
+,,,,,,,,1777000620,Suspected Bloody Diarrhoea,,,,,,,,,,
+,,,,,,,,777138868,Bloody diarrhoea,,,,,,,,,,
+,,,,,,,,777000124,Suspected Amoebiasis,,,,,,,,,,
+,,,,,,,,777139457,Suspected Giardiasis,,,,,,,,,,
+,,,,,,,,777145443,Chronic diarrhoea (>14 days),,,,,,,,,,
+,,,,,,,,777122604,Cholera,,,,,,,,,,
+,,,,select_multiple,Helminths,,,777148353,Ascaris,,,,,,,,,,
+,,,,,,,,777119356,Hookworm,,,,,,,,,,
+,,,,,,,,777000199,Helminths (other),,,,,,,,,,
+,,,,select_multiple,Upper respiratory tract infection,,,777113224,Rhinitis,,,,,,,,,,
+,,,,,,,,777149609,Acute otitis media,,,,,,,,,,
+,,,,,,,,1777000622,Chronic suppurative otitis media,,,,,,,,,,
+,,,,,,,,777114431,Otitis externa,,,,,,,,,,
+,,,,,,,,777149579,Acute Pharyngitis,,,,,,,,,,
+,,,,,,,,777149716,Acute laryngitis ,,,,,,,,,,
+,,,,select_multiple,Lower respiratory tract infection,,,1777000700,Simple Lower RTI,,,,,,,,,,
+,,,,,,,,1777000701,Severe Lower RTI,,,,,,,,,,
+,,,,select_multiple,Type of LRTI,,,777114100,Pneumonia,,,,,,,,,,
+,,,,,,,,777113809,Atypical pneumonia,,,,,,,,,,
+,,,,,,,,777121392,Aspiration pneumonia,,,,,,,,,,
+,,,,,,,,777121009,Bronchiolitis,,,,,,,,,,
+,,,,,,,,777114190,Whooping cough (pertussis),,,,,,,,,,
+,,,,select_multiple,Asthma,,,121375,Asthma,,,,,,,,,,
+,,,,select_multiple,Malaria,,,777159950,Simple Malaria,,,,,,,,,,
+,,,,,,,,777160155,Severe Malaria,,,,,,,,,,
+,,,,select_multiple,Anaemia,,,1777000645,Mild Anaemia,,,,,,,,,,
+,,,,,,,,1777000646,Moderate Anaemia,,,,,,,,,,
+,,,,,,,,1777000647,Severe Anaemia,,,,,,,,,,
+,,,,select_multiple,Mouth conditions,,,777005334,Oral thrush,,,,,,,,,,
+,,,,,,,,777139438,Gingivitis,,,,,,,,,,
+,,,,,,,,777120755,Angular stomatitis,,,,,,,,,,
+,,,,,,,,777139407,Glossitis,,,,,,,,,,
+,,,,,,,,777139437,Gingivostomatitis ,,,,,,,,,,
+,,,,,,,,1777000626,NOMA,,,,,,,,,,
+,,,,select_multiple,Eye conditions (Vitamin A deficiency),,,777115247,Night blindness,,,,,,,,,,
+,,,,,,,,777143597,Conjunctival dryness,,,,,,,,,,
+,,,,,,,,777147267,Bitot's spots,,,,,,,,,,
+,,,,,,,,1777000627,Corneal dryness,,,,,,,,,,
+,,,,,,,,777136292,Keratomalacia,,,,,,,,,,
+,,,,select_multiple,Other eye conditions,,,777119905,Conjunctivitis,,,,,,,,,,
+,,,,,,,,777112287,Trachoma,,,,,,,,,,
+,,,,select_multiple,Skin lesions,,,1777000702,Kwashiorkor related skin lesions,,,,,,,,,,
+,,,,,,,,777137693,Impetigo,,,,,,,,,,
+,,,,,,,,777150555,Abcess,,,,,,,,,,
+,,,,,,,,777000134,Cellulitis,,,,,,,,,,
+,,,,,,,,777124654,Tinea (scalp/capitis),,,,,,,,,,
+,,,,,,,,777124650,Tinea (body/corporis),,,,,,,,,,
+,,,,,,,,777000140,Scabies,,,,,,,,,,
+,,,,,,,,777118731,Eczema,,,,,,,,,,
+,,,,,,,,777148705,Anogenital candidiasis,,,,,,,,,,
+,,,,select_multiple,Shock,,,777126707,Septic shock,,,,,,,,,,
+,,,,,,,,1777000628,"Hypovolemic shock, Dehydration",,,,,,,,,,
+,,,,,,,,1777000629,"Hypovolemic shock, Bleeding",,,,,,,,,,
+,,,,,,,,777146166,Cardiogenic shock,,,,,,,,,,
+,,,,,,,,1777000630,Anaphylactic shock,,,,,,,,,,
+,,,,select_multiple,Acute meningitis,,,1777000631,Suspected acute meningitis,,,,,,,,,,
+,,,,,,,,1777000632,Confirmed acute meningitis,,,,,,,,,,
+,,,,select_multiple,Measles,,,777152209,Measles (uncomplicated),,,,,,,,,,
+,,,,,,,,777115886,Measles (complicated),,,,,,,,,,
+,,,,select_multiple,Other diagnoses,,,777111633,Urinary tract infection (UTI),,,,,,,,,,
+,,,,,,,,777127990,Fever of unknown origin,,,,,,,,,,
+,,,,,,,,777000892,Chickenpox,,,,,,,,,,
+,,,,,,,,124957,Tetanus,,,,,,,,,,
+,,,,,,,,777127394,Rickets,,,,,,,,,,
+,,,,,,,,1777000633,Sickle cell disease,,,,,,,,,,
+,,,,,,,,777114675,Osteomielitis,,,,,,,,,,
+,,,,,,,,777114702,Osteoarthritis,,,,,,,,,,
+,,,,,,,,777123084,Visceral Leishmaniasis (Kala-azar),,,,,,,,,,
+,,,,,,,,777117152,Schistosomiasis,,,,,,,,,,
+,,,,select_multiple,Tuberculosis,,,1777000635,Pulmonary TB,,,,,,,,,,
+,,,,,,,,777115753,Miliary TB,,,,,,,,,,
+,,,,,,,,777156204,Extrapulmonary TB,,,,,,,,,,
+,,,,select_multiple,Type of Extrapulmonary TB,,,777111873,Lymph node TB,,,,,,,,,,
+,,,,,,,,777161355,Abdominal TB,,,,,,,,,,
+,,,,,,,,777111904,Spinal TB (Pott’s Disease),,,,,,,,,,
+,,,,,,,,1777000636,Osteo-articular TB,,,,,,,,,,
+,,,,,,,,777111946,Pleural effusion TB,,,,,,,,,,
+,,,,,,,,777124033,Pericardial TB,,,,,,,,,,
+,,,,,,,,777111967,TB Meningitis,,,,,,,,,,
+,,,,,,,,777117825,Genitourinary TB ,,,,,,,,,,
+,,,,,,,,777124028,Skin TB,,,,,,,,,,
+,,,,select_multiple,HIV,,,777138571,HIV positive,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,
+,,Complications,,,,,,,,,,,,,,,,,
+,,,1497,select_one,Dehydration level,,,1107,○. None,,,,,,,,,,
+,,,,,,,,1498,1. Mild,,,,,,,,,,
+,,,,,,,,1499,2. Moderate,,,,,,,,,,
+,,,,,,,,1500,3. Severe,,,,,,,,,,
+,,,,,,,,777137970,Hyp. Hypovolemic Shock,,,,,,,,,,
+,,,,select_multiple,Other complications,,,777138061,Hypoglycaemia,,,,,,,,,,
+,,,,,,,,777117326,Hypothermia,,,,,,,,,,
+,,,,,,,,113054,Convulsions,,,,,,,,,,
+,,,,,,,,777118876,Altered state of consciousness,,,,,,,,,,
+,,,,,,,,122983,Vomiting,,,,,,,,,,
+,,,,,,,,777147241,Bleeding,,,,,,,,,,
+,,,,,,,,777138099,Fluid overload,,,,,,,,,,
+,,,,,,,,150915,Abdominal distention,,,,,,,,,,
+,,,,,,,,1777000637,Persistent oedema,,,,,,,,,,
+,,,,,,,,777130473,Recurrent oedema,,,,,,,,,,
+,,,,,,,,1777000638,Persistent fever,,,,,,,,,,
+,,,,,,,,1777000639,Refeeding syndrome,,,,,,,,,,
+,,,,,,,,1777000640,Difficulties with breastfeeding,,,,,,,,,,
+,,,,,,,,777135595,Persistent lack of appetite,,,,,,,,,,
+,,,,,,,,1777000641,Inappropriate weight response (if stagnant or losing weight in Phase 2),,,,,,,,,,
+,,,,,,,,1777000642,Child behavioural problems,,,,,,,,,,
+,,Plan for Patient Care,,,,,,,,,,,,,,,,,
+,,,1777000708,select_one,ATFC Outcome,,,1777000709,Follow up,,,,,,,,,,
+,,,,,,,,1777000710,Transfer to ITFC,,,,,,,,,,
+,,,,,,,,1777000711,Discharge cured,,,,,,,,,,
+,,,,,,,,1777000712,Discharge non-respondent,,,,,,,,,,
+,,,,,,,,1777000713,Transfer out of TFP,,,,,,,,,,
+,,,1777000535,text,Plan,,,,,,,,,,,,,,
+,,Additional notes,,,,,,,,,,,,,,,,,
+,,,162169,text,Notes,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,
+form,09. Immunisations form,,,,,,,,,,,,,,,,,,
+,,Health card,,,,,,,,,,,,,,,,,
+,,,1850,yes_no,Child Health Card Shown?,,,,,,,,,,,,,,
+,,History. Number of doses of immunisation received:,,,,,,,,,,,,,,,,,
+,,,1777000664,number,Measles given before,,,,,,,,,,,,,,
+,,,1777000671,number,BCG given before,,,,,,,,,,,,,,
+,,,1777000658,number,Hep B given before,,,,,,,,,,,,,,
+,,,1777000659,number,Polio (oral) given before,,,,,,,,,,,,,,
+,,,1777000660,number,Polio (inactivated) given before,,,,,,,,,,,,,,
+,,,1777000661,number,DTP given before,,,,,,,,,,,,,,
+,,,1777000662,number,DTP / Hep B / HiB given before,,,,,,,,,,,,,,
+,,,1777000663,number,Tetanus booster given before,,,,,,,,,,,,,,
+,,,1777000665,number,Pneumo given before,,,,,,,,,,,,,,
+,,,1777000666,number,Yellow Fever given before,,,,,,,,,,,,,,
+,,,1777000667,number,H Influenza given before,,,,,,,,,,,,,,
+,,,1777000668,text,Other immunisations given before,,,,,,,,,,,,,,
+,,Mother,,,,,,,,,,,,,,,,,
+,,,1777000603,yes_no,Mother received Tetanus vaccination,,,,,,,,,,,,,,
+,,,,select_multiple,Immunisations given in TFP,,,36,Measles (1st dose),,,,,,,,,,
+,,,,,,,,1777000672,Measles (2nd dose),,,,,,,,,,
+,,,,,,,,886,BCG,,,,,,,,,,
+,,,,,,,,777000782,Hep B,,,,,,,,,,
+,,,,,,,,783,Polio (oral),,,,,,,,,,
+,,,,,,,,777001422,Polio (inactivated),,,,,,,,,,
+,,,,,,,,781,DTP,,,,,,,,,,
+,,,,,,,,777001685,DTP / Hep B / HiB ,,,,,,,,,,
+,,,,,,,,54,Tetanus booster,,,,,,,,,,
+,,,,,,,,777001423,Pneumo,,,,,,,,,,
+,,,,,,,,777005864,Yellow Fever,,,,,,,,,,
+,,,,,,,,777005261,H Influenza,,,,,,,,,,
+,,,1777000669,text,Other,,,,,,,,,,,,,,
+,,,162169,text,Notes,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,
+form,99. -,,,,,,,,,,,,,,,,,,
+,,Section headings hack until we have real headings,,,,,,,,,,,,,,,,,
+,,,1777000111,number,ANTHROPOMETRICS:,,,,,,,,,,,,,,
+,,,1777000112,number,VITALS:,,,,,,,,,,,,,,
+,,,1777000113,number,TEST RESULTS:,,,,,,,,,,,,,,
+,,,1777000115,number,INTENSIVE OBSERVATIONS (ABC):,,,,,,,,,,,,,,
+,,,1777000116,number,- [debugging section] -,,,,,,,,,,,,,,
+,,,1777000117,number,FEEDING:,,,,,,,,,,,,,,
+,,,1777000180,number,SURVEILLANCE:,,,,,,,,,,,,,,
+,,,1777000521,number,INTENSIVE OBSERVATIONS (DE):,,,,,,,,,,,,,,
+,,,1777000537,number,BREATHING:,,,,,,,,,,,,,,
+,,,1777000538,number,CIRCULATION:,,,,,,,,,,,,,,
+,,,1777000539,number,CONSCIOUSNESS:,,,,,,,,,,,,,,
+,,,1777000540,number,DEHYDRATION:,,,,,,,,,,,,,,
+,,,1777000541,number,SKIN:,,,,,,,,,,,,,,
+,,,1777000542,number,"HEAD, EYES AND EARS:",,,,,,,,,,,,,,
+,,,1777000543,number,MOUTH/THROAT:,,,,,,,,,,,,,,
+,,,1777000544,number,ABDOMEN:,,,,,,,,,,,,,,
+,,,1777000545,number,LYMPHADENOPATHY:,,,,,,,,,,,,,,
+,,,1777000546,number,SPINE AND EXTERMITIES:,,,,,,,,,,,,,,
+,,,1777000547,number,SYMPTOMS:,,,,,,,,,,,,,,
+,,,1777000670,number,IMMUNISATIONS GIVEN IN TFP:,,,,,,,,,,,,,,
