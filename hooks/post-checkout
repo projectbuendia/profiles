@@ -1,0 +1,13 @@
+#!/bin/bash -x
+
+mkdir -p uploads
+rm -rf .uploads
+mv uploads .uploads
+for file in */*.csv; do
+    count=$(git rev-list --count HEAD -- "$file")
+    hash=$(git rev-list --abbrev-commit --max-count=1 HEAD -- "$file")
+    basename=$(basename "$file")
+    name=${basename%.csv}
+    cp "$file" .uploads/$name-$count-$hash.csv
+done
+mv .uploads uploads
