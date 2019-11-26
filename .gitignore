@@ -1,0 +1,6 @@
+# MacOS junk
+.DS_Store
+
+*.pyc
+*.sw?
+
