@@ -1,7 +1,7 @@
 tab,title,section,type,required,concept,label,option concept,option label,normal,noncritical,absolute,format,caption format,css class,css style,script
 
 
-form,Admission
+form,[1] Admission
 
 ,,Telephone [fr:Téléphone]
 ,,,text,,900402,Telephone number [fr:Numero de téléphone]
@@ -10,21 +10,21 @@ form,Admission
 ,,Family [fr:Famille]
 ,,,text,,900405,Name of head of family [fr:Nom du chef de famille]
 ,,,text,,900406,Health zone [fr:Zone de santé]
-,,,text,,900406,Health area [fr:Aire de santé]
+,,,text,,900408,Health area [fr:Aire de santé]
 ,,,text,,900407,Quartier / Village
 ,,,text,,900409,Other information [fr:Autres informations]
 
 ,,Admission
-,,,number,,162622,Date and time of admission [fr:Date et heure d'admission]
-,,,number,,1730,Date of onset of symptoms [fr:Date de début des symptômes]
+,,,datetime,,162622,Date and time of admission [fr:Date et heure d'admission]
+,,,date,,1730,Date of onset of symptoms [fr:Date de début des symptômes]
 ,,,select_one,,900300,Status [fr:État]
 ,,,,,,,903300,S. Suspect [fr:S. Suspect]
 ,,,,,,,903301,C. Confirmed [fr:C. Confirmé]
 ,,,,,,,903302,Con. Convalescent [fr:Con. Convalescence]
 
 ,,Returning patient [fr:Patient revenant]
-,,,number,,900900,Date of previous discharge [fr:Date de sortie précédente]
-,,,number,,900901,Date of last PCR test [fr:Date du dernier test PCR]
+,,,date,,910900,Date of previous discharge [fr:Date de sortie précédente]
+,,,date,,910901,Date of last PCR test [fr:Date du dernier test PCR]
 
 ,,Transport
 ,,,text,,900944,Health area where patient became ill? [fr:Aire de santé où le patient a tombé malade]
@@ -51,7 +51,7 @@ form,Admission
 ,,,yes_no,,162738,Oxygen mask in use [fr:Mask d'oxygène en usage]
 
 
-form,Accompanying person [fr:Accompagnant]
+form,[2] Accompanying person [fr:Accompagnant]
 
 ,,,text,,900401,Name [fr:Nom]
 ,,,text,,900402,Age [fr:Âge]
@@ -59,7 +59,7 @@ form,Accompanying person [fr:Accompagnant]
 ,,,yes_no,,900404,Suspected case [fr:Cas suspect]
 
 
-form,Vitals / Physical exam [fr:Signes vitaux / Examen physique]
+form,[3] Vitals / Physical exam [fr:Signes vitaux / Examen physique]
 
 ,,Vitals [fr:Signes vitaux]
 ,,,number,,5088,Temperature (°C) [fr:Température (C)],,,36-37.5,36-39,35-45
@@ -105,7 +105,7 @@ form,Vitals / Physical exam [fr:Signes vitaux / Examen physique]
 ,,,,,,,900084,Myalgia [fr:Myalgie]
 ,,,,,,,900072,Cough [fr:Toux]
 ,,,,,,,900079,Hiccups [fr:Hoquet]
-,,,,,,,900179,Dysphagia [fr:Dysphagie]
+,,,,,,,900078,Dysphagia [fr:Dysphagie]
 ,,,,,,,900073,Chest pain [fr:Douleur thoracique]
 ,,,,,,,900074,Joint pain [fr:Arthralgie]
 ,,,,,,,900074,Myalgia [fr:Arthralgie]
@@ -181,12 +181,12 @@ form,Vitals / Physical exam [fr:Signes vitaux / Examen physique]
 ,,,text,,162169,Comments [fr:Commentaires]
 
 
-form,Blood samples [fr:Échantillon]
+form,[4] Blood samples [fr:Échantillon]
 ,,,yes_no,,900104,First sample taken [fr:Premier échantillon prélevé]
 ,,,yes_no,,900114,Second sample taken [fr:Deuxième échantillon prélevé]
 
 
-form,Lab tests [fr:Tests de labo]
+form,[5] Lab tests [fr:Tests de labo]
 ,,Blood tests [fr:Tests de sang]
 ,,,number,1,900901,Blood sugar (mg/dL) [fr:Glycémie (mg/dL)],,,70-300,50-315,0-500
 ,,,number,1,900902,Hemoglobin (g/dL) [fr:Taux d'hemoglobine (g/dL)]
@@ -218,7 +218,7 @@ form,Lab tests [fr:Tests de labo]
 ,,,,,,,906005,3
 
 
-form,Ebola test [fr:Test d'Ebola]
+form,[6] Ebola test [fr:Test d'Ebola]
 ,,,select_one,1,902000,First test result [fr:Résultat du premier test]
 ,,,,,,,902001,Negative [fr:Négatif]
 ,,,,,,,902002,Positive [fr:Positif]
@@ -236,7 +236,7 @@ form,Ebola test [fr:Test d'Ebola]
 ,,,,,,,903306,"XC. Death, confirmed [fr:DC. Décès, confirmé]"
 
 
-form,Convalescent vitals and exam [fr:Convalescent signes vitaux et examen physique]
+form,[7] Convalescent vitals and exam [fr:Convalescent signes vitaux et examen physique]
 
 ,,Vitals [fr:Signes vitaux]
 ,,,number,,5088,Temperature (°C) [fr:Température (°C)],,,36-37.5,36-39,35-45
@@ -275,7 +275,7 @@ form,Convalescent vitals and exam [fr:Convalescent signes vitaux et examen physi
 ,,,text,,162169,Comments [fr:Commentaires]
 
 
-form,Discharge [fr:Sortie]
+form,[8] Discharge [fr:Sortie]
 
 ,,,select_one,,900300,Status
 ,,,,,,,903300,S. Suspect [fr:S. Suspect]
@@ -295,7 +295,7 @@ chart,Chart
 ,,,text,,162622,Admitted [fr:Admission],,,,,,"Day {1,day_number,#} [fr:Jour {1,day_number,#}]"
 ,,,text,,1730,Symptoms [fr:Symptômes],,,,,,"{1,day_number,#} {1,select,=:;=0:day;days} [fr:{1,day_number,#} {1,select,=:;=0:jour;jours}]"
 ,,,text,,buendia_concept_placement,Location [fr:Emplacement],,,,,,"{1,location}","{2,select,=:;Lit {2,text}}"
-,,,text,,900025,Category [fr:Catégorie],,,,,,"{1,select,1065:Green;1066:Yellow;1067:Red} [fr:{1,select,1065:Vert;1066:Jaune;1067:Rouge}]",,{1,select,1065:green;1066:yellow;1067:red}
+,,,text,,900010,Category [fr:Catégorie],,,,,,"{1,select,1065:Green;1066:Yellow;1067:Red} [fr:{1,select,1065:Vert;1066:Jaune;1067:Rouge}]",,{1,select,1065:green;1066:yellow;1067:red}
 ,,[[fixed]]
 ,,,text,,900104,Sample taken [fr:Échantillon prélevé],,,,,,"{1,select,1065:Prelevé;1066:Non}"
 ,,,text,,900104,Ebola tests [fr:Tests d'Ébola],,,,,,"{1,select,1065:Prelevé;1066:Non}"
@@ -320,8 +320,6 @@ chart,Chart
 ,,,select_one,,901000,Urinary function [fr:Fonctionne urinaire]
 ,,,select_one,,135595,Anorexia [fr:Anorexie],,,,,,"{1,select,1107:–;1498:+;1499:++;1500:+++}"
 ,,Ebola tests [fr:Examens Ebola]
-,,,number,,900025,Ebola GP PCR count [fr:Ebola GP cycles de PCR],,,,,,,,,,,,,1..40
-,,,number,,162826,Ebola NP PCR count [fr:Ebola NP cycles de PCR],,,,,,,,,,,,,1..40
 
 ,,Symptoms [fr:Symptômes]
 ,,,number,,900014,Vomiting in 24h [fr:Vomissement dans 24h],,,,,,,,,,,,,0..30
@@ -335,7 +333,6 @@ chart,Chart
 ,,,yes_no,,900077,Photophobia [fr:Photophobie]
 ,,,yes_no,,900078,Dysphagia [fr:Dysphagie]
 ,,,yes_no,,900079,Hiccups [fr:Hoquet]
-,,,yes_no,,900080,Dyspnea [fr:Dyspnée]
 ,,,yes_no,,900082,Abdominal pain [fr:Douleur abdominale]
 ,,,yes_no,,900083,Myalgia [fr:Myalgie]
 
@@ -346,7 +343,6 @@ chart,Chart
 ,,,yes_no,,143050,Cyanosis [fr:Cyanose]
 ,,,select_one,,1497,Dehydration [fr:Déshydratation]
 ,,Neuro
-,,,yes_no,,900040,Well oriented [fr:Bien orienté]
 ,,,yes_no,,118299,Agitation [fr:Agitation]
 ,,,yes_no,,120345,Confusion [fr:Confusion]
 ,,,yes_no,,206,Seizures [fr:Crise convulsive]
@@ -374,7 +370,7 @@ chart,Chart
 ,,,yes_no,,5008,Hepatomegaly [fr:Heptomegalie]
 ,,,yes_no,,5009,Splenomegaly [fr:Splenomegalie]
 ,,Lab exams [fr:Examens labo]
-,,,number,,900102,Blood sugar mg/dL [fr:Niveau de glycémie mg/dL],,,70-300,50-315,0-500,,,,,,,,1..40
+,,,number,,900901,Blood sugar mg/dL [fr:Niveau de glycémie mg/dL],,,70-300,50-315,0-500,,,,,,,,1..40
 
 ,,Comments [fr:Commentaires]
 ,,,text,,162169,Comments [fr:Commentaires]
