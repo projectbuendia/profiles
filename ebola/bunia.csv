@@ -44,7 +44,9 @@ form,[1] Admission
 
 ,,Physical attributes [fr:Attributs physiques]
 ,,,number,,5089,Weight (kg) [fr:Poids (kg)],,,,,0-200
-,,,yes_no,,5272,Pregnant [fr:Enceinte]
+,,,select_one,,5272,Pregnant [fr:Enceinte]
+,,,,,,,1066,"No [fr:Non]"
+,,,,,,,1065,"Yes [fr:Oui]"
 
 ,,Medical attributes [fr:Attributs médicaux]
 ,,,yes_no,,900012,IV access present [fr:Acces IV est présent]
@@ -53,7 +55,8 @@ form,[1] Admission
 
 form,[2] Accompanying person [fr:Accompagnant]
 
-,,,text,,969,Name [fr:Nom]
+,,Accompanying person [fr:Accompagnant]
+,,,text,,900044,Name [fr:Nom]
 ,,,text,,900013,Age [fr:Âge]
 ,,,text,,900014,Relation to patient [fr:Lien avec le patient]
 ,,,yes_no,,162743,Suspected case [fr:Cas suspect]
@@ -66,12 +69,12 @@ form,[3] Vitals / Physical exam [fr:Signes vitaux / Examen physique]
 ,,,number,,5087,Heart rate (bpm) [fr:Fréquence cardiaque (bpm)],,,60-100,20-200,0-300
 ,,,number,,5085,"BP, systolic (mmHg) [fr:TA, systolique (mmHg)]",,,100-160,80-200,0-300
 ,,,number,,5086,"BP, diastolic (mmHg) [fr:TA, diastolique (mmHg)]",,,,,0-200
-,,,select_one,,162512,Capillary refill time [fr:Remplissage capillaire]
-,,,,,,,1066,"< 2 sec"
-,,,,,,,1065,"> 2 sec"
+,,,select_one,,162513,Capillary refill time [fr:Remplissage capillaire]
+,,,,,,,900028,"< 2 sec"
+,,,,,,,900029,"> 2 sec"
 ,,,number,,5242,Respiratory rate (bpm) [fr:Fréquence respiratoire (bpm)],,,18-40,15-60,0-200
 ,,,number,,5092,"O₂ saturation, ambient [fr:Saturation en O₂, ambiant]",,,90-100,60-100,0-100
-,,,number,,900015,"O₂ saturation, receiving oxygen [fr:Saturation en O₂, reçoit oxygène",,,90-100,60-100,0-100
+,,,number,,900015,"O₂ saturation, receiving oxygen [fr:Saturation en O₂, reçoit oxygène]",,,90-100,60-100,0-100
 
 ,,,select_one,,1497,Dehydration [fr:Déshydratation]
 ,,,,,,,1107,None [fr:Aucun]
@@ -92,9 +95,9 @@ form,[3] Vitals / Physical exam [fr:Signes vitaux / Examen physique]
 
 ,,,select_one,,135595,Anorexia [fr:Anorexie]
 ,,,,,,,1107,None [fr:Aucun]
-,,,,,,,1498,+
-,,,,,,,1499,++
-,,,,,,,1500,+++
+,,,,,,,1362,+
+,,,,,,,1363,++
+,,,,,,,1364,+++
 
 ,,Symptoms [fr:Symptômes]
 ,,,number,,900016,"Vomiting, times in last 24 hours [fr:Vomissement, fois dans 24h]",,,,,0-30
@@ -138,10 +141,10 @@ form,[3] Vitals / Physical exam [fr:Signes vitaux / Examen physique]
 ,,,,,,,150341,Injection site [fr:Site d'injection]
 ,,,,,,,130324,Petechiae [fr:Pétéchies]
 
-,,,select_one,,122496,Respiration [fr:Respiratoire]
+,,,select_one,,900038,Respiration [fr:Respiratoire]
 ,,,,,,,1115,Normal [fr:Normale]
-,,,,,,,1498,Mild dyspnea [fr:Dyspnée légère]
-,,,,,,,1500,Severe dyspnea [fr:Dyspnée grave]
+,,,,,,,141599,Mild dyspnea [fr:Dyspnée légère]
+,,,,,,,122496,Severe dyspnea [fr:Dyspnée grave]
 
 ,,,select_multiple,,,Circulation
 ,,,,,,,124823,Weak pulse [fr:Pouls faible]
@@ -156,24 +159,23 @@ form,[3] Vitals / Physical exam [fr:Signes vitaux / Examen physique]
 ,,,,,,,5008,Hepatomegaly [fr:Héptomegalie]
 ,,,,,,,5009,Splenomegaly [fr:Splénomegalie]
 
-,,Co-morbidities [fr:Co-morbidités]
 ,,,select_multiple,,,Co-morbidities [fr:Co-morbidités]
 ,,,,,,,117399,Hypertension [fr:Hypertension]
-,,,,,,,155569,Chronic lung disease [fr: Maladie pulmonaire chronique]
-,,,,,,,145349,Chronic heart disease [fr: Maladie cardiaque chronique]
-,,,,,,,119481,Diabetes [fr: Diabètes]
+,,,,,,,119481,Diabetes [fr:Diabètes]
+,,,,,,,155569,Chronic lung disease [fr:Maladie pulmonaire chronique]
+,,,,,,,145349,Chronic heart disease [fr:Maladie cardiaque chronique]
 ,,,text,,162747,Other co-morbidities [fr:Autres co-morbidités]
 
 ,,Evaluation [fr:Évaluation]
 ,,,select_one,,900018,Condition [fr:Condition]
-,,,,,,,1115,1. Stable [fr:1. Stable]
-,,,,,,,1498,2. Less stable [fr:2. Moins stable]
-,,,,,,,1500,3. Critical [fr:3. Critique]
+,,,,,,,1855,1. Stable [fr:1. Stable]
+,,,,,,,900039,2. Less stable [fr:2. Moins stable]
+,,,,,,,900040,3. Critical [fr:3. Critique]
 
 ,,,select_one,,900019,Category [fr:Catégorie]
-,,,,,,,1115,Green [fr:Vert]
-,,,,,,,1498,Yellow [fr:Jaune]
-,,,,,,,1500,Red [fr:Rouge]
+,,,,,,,900041,Green [fr:Vert]
+,,,,,,,900042,Yellow [fr:Jaune]
+,,,,,,,900043,Red [fr:Rouge]
 
 ,,Notes [fr:Remarques]
 ,,,text,,159393,Diagnosis [fr:Diagnostique]
@@ -181,6 +183,7 @@ form,[3] Vitals / Physical exam [fr:Signes vitaux / Examen physique]
 
 
 form,[4] Blood samples [fr:Échantillon]
+,,Blood samples taken [fr:Échantillons prélevés]
 ,,,yes_no,,900020,First sample taken [fr:Premier échantillon prélevé]
 ,,,yes_no,,900021,Second sample taken [fr:Deuxième échantillon prélevé]
 
@@ -206,23 +209,24 @@ form,[5] Lab tests [fr:Tests de labo]
 
 ,,Urine tests [fr:Bandelette urinaire]
 ,,,yes_no,,161440,Nitrites
-,,,select_one,1,161442,Cetone
-,,,,,,,664,0
-,,,,,,,1362,1
-,,,,,,,1363,2
-,,,,,,,1364,3
+,,,select_one,1,161442,Ketone [fr:Cetone]
+,,,,,,,900030,0
+,,,,,,,900031,1
+,,,,,,,900032,2
+,,,,,,,900033,3
 ,,,select_one,1,159734,Glucose
-,,,,,,,664,0
-,,,,,,,1362,1
-,,,,,,,1363,2
-,,,,,,,1364,3
+,,,,,,,900034,0
+,,,,,,,900035,1
+,,,,,,,900036,2
+,,,,,,,900037,3
 
 
 form,[6] Ebola test [fr:Test d'Ebola]
+,,Ebola test [fr:Test d'Ebola]
 ,,,select_one,1,900023,First test result [fr:Résultat du premier test]
 ,,,,,,,664,Negative [fr:Négatif]
 ,,,,,,,703,Positive [fr:Positif]
-,,,select_one,1,900024,Second test [fr:Résultat du deuxième test]
+,,,select_one,1,900024,Second test result [fr:Résultat du deuxième test]
 ,,,,,,,664,Negative [fr:Négatif]
 ,,,,,,,703,Positive [fr:Positif]
 
@@ -246,9 +250,9 @@ form,[7] Convalescent vitals and exam [fr:Convalescent signes vitaux et examen p
 
 ,,,select_one,,135595,Anorexia [fr:Anorexie]
 ,,,,,,,1107,None [fr:Aucun]
-,,,,,,,1498,+
-,,,,,,,1499,++
-,,,,,,,1500,+++
+,,,,,,,1362,+
+,,,,,,,1363,++
+,,,,,,,1364,+++
 
 ,,,select_multiple,,,Symptoms [fr:Symptômes]
 ,,,,,,,139084,Headache [fr:Mal de tête]
@@ -261,14 +265,14 @@ form,[7] Convalescent vitals and exam [fr:Convalescent signes vitaux et examen p
 ,,,,,,,119537,Depression [fr:Depression]
 
 ,,,select_one,,900018,Condition [fr:Condition]
-,,,,,,,1115,1. Stable [fr:1. Stable]
-,,,,,,,1498,2. Less stable [fr:2. Moins stable]
-,,,,,,,1500,3. Critical [fr:3. Critique]
+,,,,,,,1855,1. Stable [fr:1. Stable]
+,,,,,,,900039,2. Less stable [fr:2. Moins stable]
+,,,,,,,900040,3. Critical [fr:3. Critique]
 
 ,,,select_one,,900019,Category [fr:Catégorie]
-,,,,,,,1115,Green [fr:Vert]
-,,,,,,,1498,Yellow [fr:Jaune]
-,,,,,,,1500,Red [fr:Rouge]
+,,,,,,,900041,Green [fr:Vert]
+,,,,,,,900042,Yellow [fr:Jaune]
+,,,,,,,900043,Red [fr:Rouge]
 
 ,,Notes [fr:Remarques]
 ,,,text,,159393,Diagnosis [fr:Diagnostique]
@@ -277,7 +281,8 @@ form,[7] Convalescent vitals and exam [fr:Convalescent signes vitaux et examen p
 
 form,[8] Discharge [fr:Sortie]
 
-,,,datetime,,1641,Date of discharge
+,,Discharge [fr:Sortie]
+,,,datetime,,1641,Date and time of discharge [fr:Date et heure de sortie]
 
 ,,,select_one,,900005,Status [fr:État]
 ,,,,,,,142177,ES. Ebola Suspected [fr:ES. Ebola Suspecté]
@@ -297,83 +302,4 @@ chart,Chart
 ,,,text,,1640,Admitted [fr:Admission],,,,,,"Day {1,day_number,#} [fr:Jour {1,day_number,#}]"
 ,,,text,,1730,Symptoms [fr:Symptômes],,,,,,"{1,day_number,#} {1,select,=:;=0:day;days} [fr:{1,day_number,#} {1,select,=:;=0:jour;jours}]"
 ,,,text,,buendia_concept_placement,Location [fr:Emplacement],,,,,,"{1,location}","{2,select,=:;Lit {2,text}}"
-,,,text,,900010,Category [fr:Catégorie],,,,,,"{1,select,1065:Green;1066:Yellow;1067:Red} [fr:{1,select,1065:Vert;1066:Jaune;1067:Rouge}]",,{1,select,1065:green;1066:yellow;1067:red}
-,,[[fixed]]
-,,,text,,900104,Sample taken [fr:Échantillon prélevé],,,,,,"{1,select,1065:Prelevé;1066:Non}"
-,,,text,,900104,Ebola tests [fr:Tests d'Ébola],,,,,,"{1,select,1065:Prelevé;1066:Non}"
-,,,text,,900103,Co-morbidities [fr:Co-morbidités],,,,,,,,,font-size:80%
-,,[[fixed]]
-,,,text,,900101,Diagnosis [fr:Diagnostique]
-,,[tiles]
-,,,number,,5089,Weight (kg) [fr:Poids (kg)],,,,,,#.0,,,,,,,0..200
-,,,select_one,,900010,Condition [fr:Condition]
-,,,select_one,,162738,On O₂ [fr:Reçoit de l'O₂],,,,,,"{1,select,1065:Reç O₂;1066:Non}"
-,,,select_one,,162643,Consciousness [fr:Conscience]
-
-,,Vitals [fr:Signes vitaux]
-,,,number,,5087,Heart rate (bpm) [fr:Rythme cardiaque (bpm)],,,,,,,,,,,,,40..200
-,,,number,,5242,Respiratory rate (bpm) [fr:Fréquence respiratoire (cpm)],,,,,,,,,,,,,12..60
-,,,number,,5092,O₂ saturation [fr:Saturation en O₂],,,,,,#'%',,,,,,,75..100
-,,,number,,5085,"BP, systolic (mmHg) [fr:TA, systolique (mmHg)]",,,,,,,,,,,,,90..200
-,,,number,,5086,"BP, diastolic (mmHg) [fr:TA, diastolique (mmHg)]",,,,,,,,,,,,,40..160
-,,,number,,162513,Cap. refill time (s) [fr:Rempl. capillaire (s)],,,,,,,,,,,,,0..10
-,,,number,,5088,Temperature (°C) [fr:Température (°C)],,,,,,#.0°,,,,,,,32..43
-,,,select_one,,162643,Consciousness (AVPU) [fr:Conscience (AVPU)]
-,,,select_one,,901000,Urinary function [fr:Fonctionne urinaire]
-,,,select_one,,135595,Anorexia [fr:Anorexie],,,,,,"{1,select,1107:–;1498:+;1499:++;1500:+++}"
-,,Ebola tests [fr:Examens Ebola]
-
-,,Symptoms [fr:Symptômes]
-,,,number,,900014,Vomiting in 24h [fr:Vomissement dans 24h],,,,,,,,,,,,,0..30
-,,,number,,900015,Diarrhea in 24h [fr:Diarrhée dans 24h],,,,,,,,,,,,,0..30
-,,,yes_no,,900070,Headache [fr:Mal de tête]
-,,,yes_no,,900071,Asthenia [fr:Asthénie]
-,,,yes_no,,900072,Cough [fr:Toux]
-,,,yes_no,,900073,Chest pain [fr:Douleur thoracique]
-,,,yes_no,,900075,Nausea [fr:Nausée]
-,,,yes_no,,900076,Back pain [fr:Mal de dos]
-,,,yes_no,,900077,Photophobia [fr:Photophobie]
-,,,yes_no,,900078,Dysphagia [fr:Dysphagie]
-,,,yes_no,,900079,Hiccups [fr:Hoquet]
-,,,yes_no,,151,Abdominal pain [fr:Douleur abdominale]
-,,,yes_no,,121,Myalgia [fr:Myalgie]
-
-,,Physical exam [fr:Examen physique]
-,,,select_one,,900010,Condition
-,,,yes_no,,5245,Pallor [fr:Pâleur]
-,,,yes_no,,136443,Jaundice [fr:Jaunesse]
-,,,yes_no,,143050,Cyanosis [fr:Cyanose]
-,,,select_one,,1497,Dehydration [fr:Déshydratation]
-,,Neuro
-,,,yes_no,,118299,Agitation [fr:Agitation]
-,,,yes_no,,120345,Confusion [fr:Confusion]
-,,,yes_no,,206,Seizures [fr:Convulsions]
-,,,yes_no,,144576,Coma [fr:Coma]
-,,Bleeding [fr:Saignement]
-,,,yes_no,,517,Conjunctival injection [fr:Injection conjonctive]
-,,,yes_no,,147230,Gingival hemorrhage [fr:Hémorragie gingivale]
-,,,yes_no,,133499,Epistaxis [fr:Epistaxie]
-,,,yes_no,,138905,Hemoptysis [fr:Hémoptysie]
-,,,yes_no,,139006,Hematemesis [fr:Hématemesie]
-,,,yes_no,,134394,Melaena [fr:Melena]
-,,,yes_no,,840,Hematuria [fr:Hématurie]
-,,,yes_no,,147232,Vaginal [fr:Vaginal]
-,,,yes_no,,150341,Injection site bleeding [fr:Saignement injection]
-,,,yes_no,,130324,Petechiae [fr:Pétéchies]
-,,Respiratory [fr:Respiratoire]
-,,,select_one,,901001,Respiration [fr:Respiration]
-,,Circulation [fr:Circulation]
-,,,yes_no,,124823,Weak pulse [fr:Pouls faible]
-,,,yes_no,,162510,Cold extremities [fr:Extrémités froides]]
-,,Abdomen 
-,,,yes_no,,159486,Soft [fr:Mou]
-,,,yes_no,,148688,Distended [fr:Distendu]
-,,,yes_no,,159249,Painful [fr:Douleureux]
-,,,yes_no,,5008,Hepatomegaly [fr:Heptomegalie]
-,,,yes_no,,5009,Splenomegaly [fr:Splenomegalie]
-,,Lab exams [fr:Examens labo]
-,,,number,,900901,Blood sugar mg/dL [fr:Niveau de glycémie mg/dL],,,70-300,50-315,0-500,,,,,,,,1..40
-
-,,Comments [fr:Commentaires]
-,,,text,,162169,Comments [fr:Commentaires]
-
+,,,text,,900019,Category [fr:Catégorie],,,,,,"{1,select,1065:Green;1066:Yellow;1067:Red} [fr:{1,select,1065:Vert;1066:Jaune;1067:Rouge}]",,{1,select,1065:green;1066:yellow;1067:red}
