@@ -4,59 +4,59 @@ tab,title,section,type,required,concept,label,option concept,option label,normal
 form,[1] Admission
 
 ,,Telephone [fr:Téléphone]
-,,,text,,900402,Telephone number [fr:Numero de téléphone]
-,,,text,,900403,Owner of telephone [fr:Propriétaire du téléphone]
+,,,text,,159635,Telephone number [fr:Numero de téléphone]
+,,,text,,900001,Owner of telephone [fr:Propriétaire du téléphone]
 
-,,Family [fr:Famille]
-,,,text,,900405,Name of head of family [fr:Nom du chef de famille]
-,,,text,,900406,Health zone [fr:Zone de santé]
-,,,text,,900408,Health area [fr:Aire de santé]
-,,,text,,900407,Quartier / Village
-,,,text,,900409,Other information [fr:Autres informations]
+,,Home [fr:Domicile]
+,,,text,,900002,Name of head of family [fr:Nom du chef de famille]
+,,,text,,900003,Health zone [fr:Zone de santé]
+,,,text,,900004,Health area [fr:Aire de santé]
+,,,text,,1354,Quartier / Village
+,,,text,,159942,Other information [fr:Autres informations]
 
 ,,Admission
-,,,datetime,,162622,Date and time of admission [fr:Date et heure d'admission]
+,,,datetime,,1640,Date and time of admission [fr:Date et heure d'admission]
 ,,,date,,1730,Date of onset of symptoms [fr:Date de début des symptômes]
-,,,select_one,,900300,Status [fr:État]
-,,,,,,,903300,S. Suspect [fr:S. Suspect]
-,,,,,,,903301,C. Confirmed [fr:C. Confirmé]
-,,,,,,,903302,Con. Convalescent [fr:Con. Convalescence]
+,,,select_one,,900005,Status [fr:État]
+,,,,,,,142177,S. Suspect [fr:S. Suspect]
+,,,,,,,159392,C. Confirmed [fr:C. Confirmé]
+,,,,,,,119844,Con. Convalescent [fr:Con. Convalescence]
 
 ,,Returning patient [fr:Patient revenant]
-,,,date,,910900,Date of previous discharge [fr:Date de sortie précédente]
-,,,date,,910901,Date of last PCR test [fr:Date du dernier test PCR]
+,,,date,,900006,Date of previous discharge [fr:Date de sortie précédente]
+,,,date,,900007,Date of last PCR test [fr:Date du dernier test PCR]
 
 ,,Transport
-,,,text,,900944,Health area where patient became ill? [fr:Aire de santé où le patient a tombé malade]
-,,,text,,900945,Health area patient transported from [fr:Aire de santé d'où le patient était transporté]
+,,,text,,162721,Health area where patient became ill [fr:Aire de santé où le patient a tombé malade]
+,,,text,,1673,Health area patient transported from [fr:Aire de santé d'où le patient était transporté]
 ,,,select_one,,900903,Mode of transport [fr:Moyen de transport]
-,,,,,,,900904,"Taxi, car [fr:Taxi, voiture]"
-,,,,,,,900905,"Taxi, moto [fr:Taxi, moto]"
-,,,,,,,900906,On foot [fr:À pied]
-,,,,,,,900907,Private car [fr:Voiture privée]
-,,,,,,,900908,Private moto [fr:Moto privée]
-,,,,,,,900909,MSP ambulance [fr:Ambulance de MSP]
-,,,,,,,900910,MSF ambulance [fr:Ambulance de MSF]
-,,,,,,,900911,Red Cross ambulance [fr:Ambulance de Croix Rouge]
-,,,,,,,900912,Other ambulance [fr:Autre ambulance]
-,,,,,,,900913,Other [fr:Autre]
-,,,text,,900914,Other mode of transport [fr:Autre moyen de transport]
+,,,,,,,162711,"Taxi, car [fr:Taxi, voiture]"
+,,,,,,,900008,"Taxi, moto [fr:Taxi, moto]"
+,,,,,,,1613,On foot [fr:À pied]
+,,,,,,,1615,Private car [fr:Voiture privée]
+,,,,,,,1614,Private moto [fr:Moto privée]
+,,,,,,,900009,MSP ambulance [fr:Ambulance de MSP]
+,,,,,,,900010,MSF ambulance [fr:Ambulance de MSF]
+,,,,,,,900011,Red Cross ambulance [fr:Ambulance de Croix Rouge]
+,,,,,,,1377,Other ambulance [fr:Autre ambulance]
+,,,,,,,5622,Other [fr:Autre]
+,,,text,,1378,Other mode of transport [fr:Autre moyen de transport]
 
 ,,Physical attributes [fr:Attributs physiques]
-,,,number,,900100,Weight (kg) [fr:Poids (kg)],,,,,0-200
+,,,number,,5089,Weight (kg) [fr:Poids (kg)],,,,,0-200
 ,,,yes_no,,5272,Pregnant [fr:Enceinte]
 
 ,,Medical attributes [fr:Attributs médicaux]
-,,,yes_no,,900011,IV access present [fr:Acces IV est présent]
+,,,yes_no,,900012,IV access present [fr:Acces IV est présent]
 ,,,yes_no,,162738,Oxygen mask in use [fr:Mask d'oxygène en usage]
 
 
 form,[2] Accompanying person [fr:Accompagnant]
 
-,,,text,,900401,Name [fr:Nom]
-,,,text,,900402,Age [fr:Âge]
-,,,text,,900403,Relation to patient [fr:Lien avec le patient]
-,,,yes_no,,900404,Suspected case [fr:Cas suspect]
+,,,text,,969,Name [fr:Nom]
+,,,text,,900013,Age [fr:Âge]
+,,,text,,900014,Relation to patient [fr:Lien avec le patient]
+,,,yes_no,,162743,Suspected case [fr:Cas suspect]
 
 
 form,[3] Vitals / Physical exam [fr:Signes vitaux / Examen physique]
@@ -66,12 +66,12 @@ form,[3] Vitals / Physical exam [fr:Signes vitaux / Examen physique]
 ,,,number,,5087,Heart rate (bpm) [fr:Fréquence cardiaque (bpm)],,,60-100,20-200,0-300
 ,,,number,,5085,"BP, systolic (mmHg) [fr:TA, systolique (mmHg)]",,,100-160,80-200,0-300
 ,,,number,,5086,"BP, diastolic (mmHg) [fr:TA, diastolique (mmHg)]",,,,,0-200
-,,,select_one,,162513,Capillary refill time [fr:Remplissage capillaire]
-,,,,,,,900800,"< 2 sec"
-,,,,,,,900801,"> 2 sec"
+,,,select_one,,162512,Capillary refill time [fr:Remplissage capillaire]
+,,,,,,,1066,"< 2 sec"
+,,,,,,,1065,"> 2 sec"
 ,,,number,,5242,Respiratory rate (bpm) [fr:Fréquence respiratoire (bpm)],,,18-40,15-60,0-200
 ,,,number,,5092,"O₂ saturation, ambient [fr:Saturation en O₂, ambiant]",,,90-100,60-100,0-100
-,,,number,,905092,"O₂ saturation, receiving oxygen [fr:Saturation en O₂, reçoit oxygène",,,90-100,60-100,0-100
+,,,number,,900015,"O₂ saturation, receiving oxygen [fr:Saturation en O₂, reçoit oxygène",,,90-100,60-100,0-100
 
 ,,,select_one,,1497,Dehydration [fr:Déshydratation]
 ,,,,,,,1107,None [fr:Aucun]
@@ -85,10 +85,10 @@ form,[3] Vitals / Physical exam [fr:Signes vitaux / Examen physique]
 ,,,,,,,162644,P. Responds to pain [fr:P. Repond à douleur]
 ,,,,,,,159508,U. Unresponsive [fr:U. Pas de réponse]
 
-,,,select_one,,901000,Urinary function [fr:Fonctionne urinaire]
-,,,,,,,900027,Normal [fr:Normale]
-,,,,,,,900028,Oliguria [fr:Oligurie]
-,,,,,,,900029,Anuria [fr:Anurie]
+,,,select_one,,160208,Urinary function [fr:Fonctionne urinaire]
+,,,,,,,1115,Normal [fr:Normale]
+,,,,,,,132418,Oliguria [fr:Oligurie]
+,,,,,,,148566,Anuria [fr:Anurie]
 
 ,,,select_one,,135595,Anorexia [fr:Anorexie]
 ,,,,,,,1107,None [fr:Aucun]
@@ -97,30 +97,29 @@ form,[3] Vitals / Physical exam [fr:Signes vitaux / Examen physique]
 ,,,,,,,1500,+++
 
 ,,Symptoms [fr:Symptômes]
-,,,number,,900014,"Vomiting, times in last 24 hours [fr:Vomissement, fois dans 24h]",,,,,0-30
-,,,number,,900015,"Diarrhea, times in last 24 hours [fr:Diarrhée, fois dans 24h]",,,,,0-30
+,,,number,,900016,"Vomiting, times in last 24 hours [fr:Vomissement, fois dans 24h]",,,,,0-30
+,,,number,,900017,"Diarrhea, times in last 24 hours [fr:Diarrhée, fois dans 24h]",,,,,0-30
 ,,,select_multiple,,,Other symptoms [fr:Autres symptômes]
-,,,,,,,900070,Headache [fr:Mal de tête]
-,,,,,,,900071,Asthenia [fr:Asthenie]
-,,,,,,,900084,Myalgia [fr:Myalgie]
-,,,,,,,900072,Cough [fr:Toux]
-,,,,,,,900079,Hiccups [fr:Hoquet]
-,,,,,,,900078,Dysphagia [fr:Dysphagie]
-,,,,,,,900073,Chest pain [fr:Douleur thoracique]
-,,,,,,,900074,Joint pain [fr:Arthralgie]
-,,,,,,,900074,Myalgia [fr:Arthralgie]
-,,,,,,,900075,Nausea [fr:Nausée]
-,,,,,,,900082,Abdominal pain [fr:Douleur abdominale]
-,,,,,,,900076,Back pain [fr:Mal au dos]
-,,,,,,,900083,Lumbopelvic pain [fr:Douleur lombopelvienne]
-,,,,,,,900077,Photophobia [fr:Photophobie]
+,,,,,,,139084,Headache [fr:Mal de tête]
+,,,,,,,5226,Asthenia [fr:Asthenie]
+,,,,,,,121,Myalgia [fr:Myalgie]
+,,,,,,,143264,Cough [fr:Toux]
+,,,,,,,138662,Hiccups [fr:Hoquet]
+,,,,,,,118789,Dysphagia [fr:Dysphagie]
+,,,,,,,120749,Chest pain [fr:Douleur thoracique]
+,,,,,,,80,Joint pain [fr:Arthralgie]
+,,,,,,,5978,Nausea [fr:Nausée]
+,,,,,,,151,Abdominal pain [fr:Douleur abdominale]
+,,,,,,,148035,Back pain [fr:Mal au dos]
+,,,,,,,116225,Lumbopelvic pain [fr:Douleur lombopelvienne]
+,,,,,,,114158,Photophobia [fr:Photophobie]
 
 ,,,select_multiple,,,Coloration [fr:Coloration cutaneo-muqueux]
 ,,,,,,,5245,Pallor [fr:Pâleur]
 ,,,,,,,136443,Jaundice [fr:Ictère]
 ,,,,,,,143050,Cyanosis [fr:Cyanose]
 
-,,,select_multiple,,900060,Neuro
+,,,select_multiple,,,Neuro
 ,,,,,,,118299,Agitation [fr:Agitation]
 ,,,,,,,120345,Confusion [fr:Confusion]
 ,,,,,,,206,Seizures [fr:Convulsions]
@@ -133,27 +132,27 @@ form,[3] Vitals / Physical exam [fr:Signes vitaux / Examen physique]
 ,,,,,,,138905,Hemoptysis [fr:Hemoptysie]
 ,,,,,,,139006,Hematemesis [fr:Hematemesie]
 ,,,,,,,134394,Melaena [fr:Melena]
-,,,,,,,900777,Rectal [fr:Rectorragie]
+,,,,,,,127854,Rectal [fr:Rectorragie]
 ,,,,,,,840,Hematuria [fr:Hématurie]
 ,,,,,,,147232,Vaginal [fr:Vaginal]
 ,,,,,,,150341,Injection site [fr:Site d'injection]
 ,,,,,,,130324,Petechiae [fr:Pétéchies]
 
-,,,select_one,,901001,Respiration [fr:Respiratoire]
+,,,select_one,,122496,Respiration [fr:Respiratoire]
 ,,,,,,,1115,Normal [fr:Normale]
-,,,,,,,141599,Mild dyspnea [fr:Dyspnée légère]
-,,,,,,,122496,Severe dyspnea [fr:Dyspnée grave]
+,,,,,,,1498,Mild dyspnea [fr:Dyspnée légère]
+,,,,,,,1500,Severe dyspnea [fr:Dyspnée grave]
 
-,,,select_multiple,,901002,Circulation
+,,,select_multiple,,,Circulation
 ,,,,,,,124823,Weak pulse [fr:Pouls faible]
-,,,,,,,901003,Fast pulse [fr:Pouls rapide]
-,,,,,,,901004,Slow pulse [fr:Pouls lent]
+,,,,,,,128094,Fast pulse [fr:Pouls rapide]
+,,,,,,,128093,Slow pulse [fr:Pouls lent]
 ,,,,,,,162510,Cold extremities [fr:Extrémités froides]
 
 ,,,select_multiple,,,Abdomen
 ,,,,,,,159486,Soft [fr:Mou]
-,,,,,,,148688,Distended [fr:Distendu]
-,,,,,,,159249,Painful [fr:Douloureux]
+,,,,,,,150915,Distended [fr:Distendu]
+,,,,,,,151,Painful [fr:Douloureux]
 ,,,,,,,5008,Hepatomegaly [fr:Héptomegalie]
 ,,,,,,,5009,Splenomegaly [fr:Splénomegalie]
 
@@ -162,78 +161,79 @@ form,[3] Vitals / Physical exam [fr:Signes vitaux / Examen physique]
 ,,,,,,,117399,Hypertension [fr:Hypertension]
 ,,,,,,,155569,Chronic lung disease [fr: Maladie pulmonaire chronique]
 ,,,,,,,145349,Chronic heart disease [fr: Maladie cardiaque chronique]
-,,,,,,,900501,Diabetes [fr: Diabètes]
-,,,text,,900103,Other co-morbidities [fr:Autres co-morbidités]
+,,,,,,,119481,Diabetes [fr: Diabètes]
+,,,text,,162747,Other co-morbidities [fr:Autres co-morbidités]
 
 ,,Evaluation [fr:Évaluation]
-,,,select_one,,900010,Condition [fr:Condition]
-,,,,,,,1855,1. Stable [fr:1. Stable]
-,,,,,,,137793,2. Less stable [fr:2. Moins stable]
-,,,,,,,900009,3. Critical [fr:3. Critique]
+,,,select_one,,900018,Condition [fr:Condition]
+,,,,,,,1115,1. Stable [fr:1. Stable]
+,,,,,,,1498,2. Less stable [fr:2. Moins stable]
+,,,,,,,1500,3. Critical [fr:3. Critique]
 
-,,,select_one,,900010,Category [fr:Catégorie]
-,,,,,,,900700,Green [fr:Vert]
-,,,,,,,900701,Yellow [fr:Jaune]
-,,,,,,,900702,Red [fr:Rouge]
+,,,select_one,,900019,Category [fr:Catégorie]
+,,,,,,,1115,Green [fr:Vert]
+,,,,,,,1498,Yellow [fr:Jaune]
+,,,,,,,1500,Red [fr:Rouge]
 
 ,,Notes [fr:Remarques]
-,,,text,,900101,Diagnosis [fr:Diagnostique]
+,,,text,,159393,Diagnosis [fr:Diagnostique]
 ,,,text,,162169,Comments [fr:Commentaires]
 
 
 form,[4] Blood samples [fr:Échantillon]
-,,,yes_no,,900104,First sample taken [fr:Premier échantillon prélevé]
-,,,yes_no,,900114,Second sample taken [fr:Deuxième échantillon prélevé]
+,,,yes_no,,900020,First sample taken [fr:Premier échantillon prélevé]
+,,,yes_no,,900021,Second sample taken [fr:Deuxième échantillon prélevé]
 
 
 form,[5] Lab tests [fr:Tests de labo]
 ,,Blood tests [fr:Tests de sang]
-,,,number,1,900901,Blood sugar (mg/dL) [fr:Glycémie (mg/dL)],,,70-300,50-315,0-500
-,,,number,1,900902,Hemoglobin (g/dL) [fr:Taux d'hemoglobine (g/dL)]
-,,,select_one,,901911,Blood type [fr:Groupe de sang]
-,,,,,,,901912,O
-,,,,,,,901913,A
-,,,,,,,901914,B
-,,,,,,,901915,AB
-,,,select_one,,902911,Rhesus factor [fr:Facteur rhésus]
-,,,,,,,902204,-
-,,,,,,,902205,+
+,,,number,1,900022,Blood sugar (mg/dL) [fr:Glycémie (mg/dL)],,,70-300,50-315,0-500
+,,,number,1,21,Hemoglobin (g/dL) [fr:Taux d'hemoglobine (g/dL)]
+,,,select_one,,160706,Blood type [fr:Groupe de sang]
+,,,,,,,152677,O-
+,,,,,,,152676,O+
+,,,,,,,152675,A-
+,,,,,,,152674,A+
+,,,,,,,152678,B-
+,,,,,,,152679,B+
+,,,,,,,152681,AB-
+,,,,,,,152680,AB+
 
 ,,Pregnancy test [fr:Test de grossesse]
-,,,select_one,1,903903,Result [fr:Résultat]
-,,,,,,,903004,Negative [fr:Négatif]
-,,,,,,,903005,Positive [fr:Positif]
+,,,select_one,1,45,Result [fr:Résultat]
+,,,,,,,664,Negative [fr:Négatif]
+,,,,,,,703,Positive [fr:Positif]
 
 ,,Urine tests [fr:Bandelette urinaire]
-,,,yes_no,,904104,Nitrites
-,,,select_one,1,905903,Cetone
-,,,,,,,905004,0
-,,,,,,,905004,1
-,,,,,,,905005,2
-,,,,,,,905005,3
-,,,select_one,1,906903,Glucose
-,,,,,,,906004,0
-,,,,,,,906004,1
-,,,,,,,906005,2
-,,,,,,,906005,3
+,,,yes_no,,161440,Nitrites
+,,,select_one,1,161442,Cetone
+,,,,,,,664,0
+,,,,,,,1362,1
+,,,,,,,1363,2
+,,,,,,,1364,3
+,,,select_one,1,159734,Glucose
+,,,,,,,664,0
+,,,,,,,1362,1
+,,,,,,,1363,2
+,,,,,,,1364,3
 
 
 form,[6] Ebola test [fr:Test d'Ebola]
-,,,select_one,1,902000,First test result [fr:Résultat du premier test]
-,,,,,,,902001,Negative [fr:Négatif]
-,,,,,,,902002,Positive [fr:Positif]
-,,,select_one,1,902003,Second test [fr:Résultat du deuxième test]
-,,,,,,,902004,Negative [fr:Négatif]
-,,,,,,,902005,Positive [fr:Positif]
+,,,select_one,1,900023,First test result [fr:Résultat du premier test]
+,,,,,,,664,Negative [fr:Négatif]
+,,,,,,,703,Positive [fr:Positif]
+,,,select_one,1,900024,Second test [fr:Résultat du deuxième test]
+,,,,,,,664,Negative [fr:Négatif]
+,,,,,,,703,Positive [fr:Positif]
 
-,,,select_one,,900300,Status [fr:État]
-,,,,,,,903300,S. Suspect [fr:S. Suspect]
-,,,,,,,903301,C. Confirmed [fr:C. Confirmé]
-,,,,,,,903302,Con. Convalescent [fr:Con. Convalescence]
-,,,,,,,903303,"DNC. Discharged, non-case [fr:SNC. Sortie, non-cas]"
-,,,,,,,903304,"DC. Discharged, cured [fr:SG. Sortie, guéri]"
-,,,,,,,903305,"XNC. Death, non-case [fr:DNC. Décès, non-cas]"
-,,,,,,,903306,"XC. Death, confirmed [fr:DC. Décès, confirmé]"
+,,,select_one,,900005,Status [fr:État]
+,,,,,,,142177,ES. Ebola Suspected [fr:ES. Ebola Suspecté]
+,,,,,,,159392,EC. Ebola Confirmed [fr:EC. Ebola Confirmé]
+,,,,,,,119844,Con. Convalescent [fr:Con. Convalescence]
+,,,,,,,900025,"DNC. Discharged, Non-Case [fr:SNC. Sortie, Non-Cas]"
+,,,,,,,159791,"DC. Discharged, Cured [fr:SG. Sortie, Guéri]"
+,,,,,,,900026,"XNC. Death, Non-Case [fr:DNC. Décès, Non-Cas]"
+,,,,,,,900027,"XEC. Death, Ebola Confirmed [fr:DEC. Décès, Ebola Confirmé]"
 
 
 form,[7] Convalescent vitals and exam [fr:Convalescent signes vitaux et examen physique]
@@ -251,48 +251,50 @@ form,[7] Convalescent vitals and exam [fr:Convalescent signes vitaux et examen p
 ,,,,,,,1500,+++
 
 ,,,select_multiple,,,Symptoms [fr:Symptômes]
-,,,,,,,900070,Headache [fr:Mal de tête]
-,,,,,,,900071,Asthenia [fr:Asthenie]
-,,,,,,,900075,Nausea [fr:Nausée]
-,,,,,,,900082,Abdominal pain [fr:Douleur abdominale]
+,,,,,,,139084,Headache [fr:Mal de tête]
+,,,,,,,5226,Asthenia [fr:Asthenie]
+,,,,,,,5978,Nausea [fr:Nausée]
+,,,,,,,151,Abdominal pain [fr:Douleur abdominale]
 
-,,,select_multiple,,900500,Mental health [fr:Santé mentale]
+,,,select_multiple,,,Mental health [fr:Santé mentale]
 ,,,,,,,121543,Anxiety [fr:Anxiété]
 ,,,,,,,119537,Depression [fr:Depression]
 
-,,,select_one,,900010,Condition [fr:Condition]
-,,,,,,,1855,1. Stable [fr:1. Stable]
-,,,,,,,137793,2. Less stable [fr:2. Moins stable]
-,,,,,,,900009,3. Critical [fr:3. Critique]
+,,,select_one,,900018,Condition [fr:Condition]
+,,,,,,,1115,1. Stable [fr:1. Stable]
+,,,,,,,1498,2. Less stable [fr:2. Moins stable]
+,,,,,,,1500,3. Critical [fr:3. Critique]
 
-,,,select_one,,900010,Category [fr:Catégorie]
-,,,,,,,900700,Green [fr:Vert]
-,,,,,,,900701,Yellow [fr:Jaune]
-,,,,,,,900702,Red [fr:Rouge]
+,,,select_one,,900019,Category [fr:Catégorie]
+,,,,,,,1115,Green [fr:Vert]
+,,,,,,,1498,Yellow [fr:Jaune]
+,,,,,,,1500,Red [fr:Rouge]
 
 ,,Notes [fr:Remarques]
-,,,text,,900101,Diagnosis [fr:Diagnostique]
+,,,text,,159393,Diagnosis [fr:Diagnostique]
 ,,,text,,162169,Comments [fr:Commentaires]
 
 
 form,[8] Discharge [fr:Sortie]
 
-,,,select_one,,900300,Status
-,,,,,,,903300,S. Suspect [fr:S. Suspect]
-,,,,,,,903301,C. Confirmed [fr:C. Confirmé]
-,,,,,,,903302,Con. Convalescent [fr:Con. Convalescence]
-,,,,,,,903303,"DNC. Discharged, non-case [fr:SNC. Sortie, non-cas]"
-,,,,,,,903304,"DC. Discharged, cured [fr:SG. Sortie, guéri]"
-,,,,,,,903305,"XNC. Death, non-case [fr:DNC. Décès, non-cas]"
-,,,,,,,903306,"XC. Death, confirmed [fr:DC. Décès, confirmé]"
+,,,datetime,,1641,Date of discharge
 
-,,,text,,900400,Final diagnosis [fr:Diagnostique finale]
-,,,text,,900401,Discharge treatment [fr:Traitement de sortie]
+,,,select_one,,900005,Status [fr:État]
+,,,,,,,142177,ES. Ebola Suspected [fr:ES. Ebola Suspecté]
+,,,,,,,159392,EC. Ebola Confirmed [fr:EC. Ebola Confirmé]
+,,,,,,,119844,Con. Convalescent [fr:Con. Convalescence]
+,,,,,,,900025,"DNC. Discharged, Non-Case [fr:SNC. Sortie, Non-Cas]"
+,,,,,,,159791,"DC. Discharged, Cured [fr:SG. Sortie, Guéri]"
+,,,,,,,900026,"XNC. Death, Non-Case [fr:DNC. Décès, Non-Cas]"
+,,,,,,,900027,"XEC. Death, Ebola Confirmed [fr:DEC. Décès, Ebola Confirmé]"
+
+,,,text,,1642,Final diagnosis [fr:Diagnostique finale]
+,,,text,,162692,Discharge treatment [fr:Traitement de sortie]
 
 
 chart,Chart
 ,,[[fixed]]
-,,,text,,162622,Admitted [fr:Admission],,,,,,"Day {1,day_number,#} [fr:Jour {1,day_number,#}]"
+,,,text,,1640,Admitted [fr:Admission],,,,,,"Day {1,day_number,#} [fr:Jour {1,day_number,#}]"
 ,,,text,,1730,Symptoms [fr:Symptômes],,,,,,"{1,day_number,#} {1,select,=:;=0:day;days} [fr:{1,day_number,#} {1,select,=:;=0:jour;jours}]"
 ,,,text,,buendia_concept_placement,Location [fr:Emplacement],,,,,,"{1,location}","{2,select,=:;Lit {2,text}}"
 ,,,text,,900010,Category [fr:Catégorie],,,,,,"{1,select,1065:Green;1066:Yellow;1067:Red} [fr:{1,select,1065:Vert;1066:Jaune;1067:Rouge}]",,{1,select,1065:green;1066:yellow;1067:red}
@@ -303,7 +305,7 @@ chart,Chart
 ,,[[fixed]]
 ,,,text,,900101,Diagnosis [fr:Diagnostique]
 ,,[tiles]
-,,,number,,900100,Weight (kg) [fr:Poids (kg)],,,,,,#.0,,,,,,,0..200
+,,,number,,5089,Weight (kg) [fr:Poids (kg)],,,,,,#.0,,,,,,,0..200
 ,,,select_one,,900010,Condition [fr:Condition]
 ,,,select_one,,162738,On O₂ [fr:Reçoit de l'O₂],,,,,,"{1,select,1065:Reç O₂;1066:Non}"
 ,,,select_one,,162643,Consciousness [fr:Conscience]
@@ -333,8 +335,8 @@ chart,Chart
 ,,,yes_no,,900077,Photophobia [fr:Photophobie]
 ,,,yes_no,,900078,Dysphagia [fr:Dysphagie]
 ,,,yes_no,,900079,Hiccups [fr:Hoquet]
-,,,yes_no,,900082,Abdominal pain [fr:Douleur abdominale]
-,,,yes_no,,900083,Myalgia [fr:Myalgie]
+,,,yes_no,,151,Abdominal pain [fr:Douleur abdominale]
+,,,yes_no,,121,Myalgia [fr:Myalgie]
 
 ,,Physical exam [fr:Examen physique]
 ,,,select_one,,900010,Condition
@@ -345,7 +347,7 @@ chart,Chart
 ,,Neuro
 ,,,yes_no,,118299,Agitation [fr:Agitation]
 ,,,yes_no,,120345,Confusion [fr:Confusion]
-,,,yes_no,,206,Seizures [fr:Crise convulsive]
+,,,yes_no,,206,Seizures [fr:Convulsions]
 ,,,yes_no,,144576,Coma [fr:Coma]
 ,,Bleeding [fr:Saignement]
 ,,,yes_no,,517,Conjunctival injection [fr:Injection conjonctive]
