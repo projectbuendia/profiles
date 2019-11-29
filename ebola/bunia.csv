@@ -169,15 +169,15 @@ form,[3] Vitals / Physical exam [fr:Signes vitaux / Examen physique]
 ,,,text,,162747,Other co-morbidities [fr:Autres co-morbidités]
 
 ,,Evaluation [fr:Évaluation]
-,,,select_one,,900018,Condition [fr:Condition]
-,,,,,,,1855,1. Stable [fr:1. Stable]
-,,,,,,,900039,2. Less stable [fr:2. Moins stable]
-,,,,,,,900040,3. Critical [fr:3. Critique]
-
 ,,,select_one,,900019,Category [fr:Catégorie]
 ,,,,,,,900041,Green [fr:Vert]
 ,,,,,,,900042,Yellow [fr:Jaune]
 ,,,,,,,900043,Red [fr:Rouge]
+
+,,,select_one,,900018,Condition [fr:Condition]
+,,,,,,,1855,1. Stable [fr:1. Stable]
+,,,,,,,900039,2. Less stable [fr:2. Moins stable]
+,,,,,,,900040,3. Critical [fr:3. Critique]
 
 ,,Notes [fr:Remarques]
 ,,,text,,159393,Diagnosis [fr:Diagnostique]
@@ -225,10 +225,10 @@ form,[5] Lab tests [fr:Tests de labo]
 
 form,[6] Ebola test [fr:Test d'Ebola]
 ,,Ebola test [fr:Test d'Ebola]
-,,,select_one,1,900023,First test result [fr:Résultat du premier test]
+,,,select_one,,900023,First test result [fr:Résultat du premier test]
 ,,,,,,,664,Negative [fr:Négatif]
 ,,,,,,,703,Positive [fr:Positif]
-,,,select_one,1,900024,Second test result [fr:Résultat du deuxième test]
+,,,select_one,,900024,Second test result [fr:Résultat du deuxième test]
 ,,,,,,,664,Negative [fr:Négatif]
 ,,,,,,,703,Positive [fr:Positif]
 
@@ -266,15 +266,15 @@ form,[7] Convalescent vitals and exam [fr:Convalescent signes vitaux et examen p
 ,,,,,,,121543,Anxiety [fr:Anxiété]
 ,,,,,,,119537,Depression [fr:Depression]
 
-,,,select_one,,900018,Condition [fr:Condition]
-,,,,,,,1855,1. Stable [fr:1. Stable]
-,,,,,,,900039,2. Less stable [fr:2. Moins stable]
-,,,,,,,900040,3. Critical [fr:3. Critique]
-
 ,,,select_one,,900019,Category [fr:Catégorie]
 ,,,,,,,900041,Green [fr:Vert]
 ,,,,,,,900042,Yellow [fr:Jaune]
 ,,,,,,,900043,Red [fr:Rouge]
+
+,,,select_one,,900018,Condition [fr:Condition]
+,,,,,,,1855,1. Stable [fr:1. Stable]
+,,,,,,,900039,2. Less stable [fr:2. Moins stable]
+,,,,,,,900040,3. Critical [fr:3. Critique]
 
 ,,Notes [fr:Remarques]
 ,,,text,,159393,Diagnosis [fr:Diagnostique]
@@ -301,6 +301,26 @@ form,[8] Discharge [fr:Sortie]
 
 chart,Chart
 ,,[[fixed]]
-,,,text,,1640,Admitted [fr:Admission],,,,,,"Day {1,day_number,#}[fr:Jour {1,day_number,#}]","{1,time,yyyy-MM-dd HH:mm:ss}"
-,,,text,,1730,Symptoms [fr:Symptômes],,,,,,"Symp {1,day_number,#}","{1,time,yyyy-MM-dd HH:mm:ss}"
+,,,text,,1640,Admitted [fr:Admission],,,,,,"Jour {1,day_number,#}","{1,date,d MMM}"
+,,,text,,1730,Symptoms [fr:Symptômes],,,,,,"{1,day_number,#} {1,select,=:;=0:jour;jours}"
 ,,,text,,buendia_concept_placement,Location [fr:Emplacement],,,,,,"{1,location}","{2,select,=:;Lit {2,text}}"
+,,,text,,900019,Category [fr:Catégorie],,,,,,"{1,select,900041:Vert;900042:Jaune;900043:Rouge;–}",,"{1,select,900041:green;900042:yellow;900043:red}","background:#{1,select,900041:0a0;900042:a60;900043:f00}"
+
+,,[[fixed]]
+,,,text,,900020;900021,Sample taken [fr:Échantillon prélevé],,,,,,"{2,select,1065:Prélevé (2);:{1,select,1065:Prélevé (1);:Aucun}}"
+,,,text,,900023;900024,Ebola tests [fr:Tests d'Ebola],,,,,,"{1,select,664:NEG;703:POS;·} / {2,select,664:NEG;703:POS;·}"
+,,,select_one,,900005,Status [fr:État]
+,,,select_one,,900018,Condition
+
+,,Vitals [fr:Signes vitaux],,,,,,,,,,,,,,,,,
+,,,number,,5087,Heart rate (bpm) [fr:Rythme cardiaque (bpm)],,,,,,,,,,,,,40..200
+,,,number,,5242,Respiratory rate (bpm) [fr:Fréquence respiratoire (cpm)],,,,,,,,,,,,,12..60
+,,,number,,5092,O₂ saturation [fr:Saturation de l'oxygène],,,,,,#'%',,,,,,,75..100
+,,,number,,5085,"BP, systolic (mmHg) [fr:TA, systolique (mmHg)]",,,,,,,,,,,,,90..200
+,,,number,,5086,"BP, diastolic (mmHg) [fr:TA, diastolique (mmHg)]",,,,,,,,,,,,,40..160
+,,,select_one,,162513,Cap. refill time (s) [fr:Rempl. capillaire (s)],,,,,,,,,,,,,0..10
+,,,number,,5088,Temperature (°C) [fr:Temperature (°C)],,,,,,#.0°,,,,,,,32..43
+,,,select_one,,162643,Consciousness (AVPU) [fr:Conscience (AVPU)],,,,,,,,,,,,,
+,,,select_one,,160208,Urinary function [fr:Fonctionne urinaire],,,,,,,,,,,,,
+,,,select_one,,135595,Anorexia [fr:Anorexie],,,,,,"{1,select,1107:–;1498:+;1499:++;1500:+++}",,,,,,,
+
