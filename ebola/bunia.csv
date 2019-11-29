@@ -313,7 +313,7 @@ chart,Chart
 ,,,select_one,,900018,Condition
 
 ,,[[fixed]]
-,,,text,,159393,Diagnosis,,,,,,"{1,text}","{1,date,d MMM}",long-field,".long-field .heading { margin-right: 1em; } .long-field .heading, .long-field .value { display: inline; } .long-field .value { font-size: 1.4rem; padding: 0; white-space: normal; } .long-field .caption { display: none; }"
+,,,text,,159393,Diagnosis [fr:Diagnostique],,,,,,"{1,text}","{1,date,d MMM}",long-field,".long-field .heading { margin-right: 1em; } .long-field .heading, .long-field .value { display: inline; } .long-field .value { font-size: 1.4rem; padding: 0; white-space: normal; } .long-field .caption { display: none; }"
 
 ,,Vitals [fr:Signes vitaux],,,,,,,,,,,,,,,,,
 ,,,number,,5087,Heart rate (bpm) [fr:Rythme cardiaque (bpm)],,,,,,,,,,,,,40..200
