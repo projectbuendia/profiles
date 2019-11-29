@@ -301,10 +301,10 @@ form,[8] Discharge [fr:Sortie]
 
 chart,Chart
 ,,[[fixed]]
-,,,text,,1640,Admitted [fr:Admission],,,,,,"Jour {1,day_number,#}","{1,date,d MMM}"
+,,,text,,1640,Admission [fr:Admission],,,,,,"Jour {1,day_number,#}","{1,time,d MMM HH:mm}"
 ,,,text,,1730,Symptoms [fr:Symptômes],,,,,,"{1,day_number,#} {1,select,=:;=0:jour;jours}"
 ,,,text,,buendia_concept_placement,Location [fr:Emplacement],,,,,,"{1,location}","{2,select,=:;Lit {2,text}}"
-,,,text,,900019,Category [fr:Catégorie],,,,,,"{1,select,900041:Vert;900042:Jaune;900043:Rouge;–}",,"{1,select,900041:green;900042:yellow;900043:red}","background:#{1,select,900041:0a0;900042:a60;900043:f00}"
+,,,text,,900019,Category [fr:Catégorie],,,,,,"{1,select,900041:Vert;900042:Jaune;900043:Rouge;–}",,"{1,select,900041:green;900042:yellow;900043:red}",".green { background: #7c7; } .yellow { background: #fc4; } .red { background: #f76; }"
 
 ,,[[fixed]]
 ,,,text,,900020;900021,Sample taken [fr:Échantillon prélevé],,,,,,"{2,select,1065:Prélevé (2);:{1,select,1065:Prélevé (1);:Aucun}}"
@@ -314,16 +314,90 @@ chart,Chart
 
 ,,[[fixed]]
 ,,,text,,159393,Diagnosis [fr:Diagnostique],,,,,,"{1,text}","{1,date,d MMM}",long-field,".long-field .heading { margin-right: 1em; } .long-field .heading, .long-field .value { display: inline; } .long-field .value { font-size: 1.4rem; padding: 0; white-space: normal; } .long-field .caption { display: none; }"
+,,,text,,117399;119481;155569;145349;162747,Co-morbidities [fr:Co-morbidités],,,,,,"{1,select,1065:Hypertension} {2,select,1065:Diabêtes} {3,select,1065:Mal.pulmon.} {4,select,1065:Mal.cardiaq.} {5,text}",,long-field
 
-,,Vitals [fr:Signes vitaux],,,,,,,,,,,,,,,,,
+,,[tiles]
+,,,number,,5089,Weight (kg) [fr:Poids (kg)],,,,,,#.0
+,,,number,,5088,Temperature (°C) [fr:Temperature (°C)],,,,,,#.0
+,,,select_one,,162738,On O₂ [fr:Reçoit de l'O₂],,,,,,"{1,select,1065:Reç O₂;1066:Non}"
+,,,select_one,,162643,Consciousness [fr:Conscience]
+
+,,Vitals [fr:Signes vitaux]
+,,,number,,5088,Temperature (°C) [fr:Temperature (°C)],,,,,,#.0°,,,,,,,32..43
 ,,,number,,5087,Heart rate (bpm) [fr:Rythme cardiaque (bpm)],,,,,,,,,,,,,40..200
-,,,number,,5242,Respiratory rate (bpm) [fr:Fréquence respiratoire (cpm)],,,,,,,,,,,,,12..60
-,,,number,,5092,O₂ saturation [fr:Saturation de l'oxygène],,,,,,#'%',,,,,,,75..100
 ,,,number,,5085,"BP, systolic (mmHg) [fr:TA, systolique (mmHg)]",,,,,,,,,,,,,90..200
 ,,,number,,5086,"BP, diastolic (mmHg) [fr:TA, diastolique (mmHg)]",,,,,,,,,,,,,40..160
 ,,,select_one,,162513,Cap. refill time (s) [fr:Rempl. capillaire (s)],,,,,,,,,,,,,0..10
-,,,number,,5088,Temperature (°C) [fr:Temperature (°C)],,,,,,#.0°,,,,,,,32..43
-,,,select_one,,162643,Consciousness (AVPU) [fr:Conscience (AVPU)],,,,,,,,,,,,,
-,,,select_one,,160208,Urinary function [fr:Fonctionne urinaire],,,,,,,,,,,,,
-,,,select_one,,135595,Anorexia [fr:Anorexie],,,,,,"{1,select,1107:–;1498:+;1499:++;1500:+++}",,,,,,,
+,,,number,,5242,Respiratory rate (bpm) [fr:Fréquence respiratoire (cpm)],,,,,,,,,,,,,12..60
+
+,,,number,,5092,"O₂ saturation, ambient [fr:Saturation en O₂, ambiant]",,,,,,#'%',,,,,,,75..100
+,,,number,,900015,"O₂ saturation, on O₂ [fr:Saturation en O₂, reçoit O₂]",,,,,,#'%',,,,,,,75..100
+
+,,,select_one,,1497,Dehydration [fr:Déshydratation]
+,,,select_one,,162643,Consciousness (AVPU) [fr:Conscience (AVPU)]
+
+,,,select_one,,160208,Urinary function [fr:Fonctionne urinaire]
+,,,select_one,,135595,Anorexia [fr:Anorexie],,,,,,"{1,select,1107:–;1498:+;1499:++;1500:+++}"
+
+,,Symptoms [fr:Symptômes]
+,,,number,,900016,"Vomiting in 24h [fr:Vomissement dans 24h]",,,,,0-30
+,,,number,,900017,"Diarrhea in 24h [fr:Diarrhée dans 24h]",,,,,0-30
+,,,yes_no,,139084,Headache [fr:Mal de tête]
+,,,yes_no,,5226,Asthenia [fr:Asthenie]
+,,,yes_no,,121,Myalgia [fr:Myalgie]
+,,,yes_no,,143264,Cough [fr:Toux]
+,,,yes_no,,138662,Hiccups [fr:Hoquet]
+,,,yes_no,,118789,Dysphagia [fr:Dysphagie]
+,,,yes_no,,120749,Chest pain [fr:Douleur thoracique]
+,,,yes_no,,80,Joint pain [fr:Arthralgie]
+,,,yes_no,,5978,Nausea [fr:Nausée]
+,,,yes_no,,151,Abdominal pain [fr:Douleur abdominale]
+,,,yes_no,,148035,Back pain [fr:Mal au dos]
+,,,yes_no,,116225,Lumbopelvic pain [fr:Douleur lombopelvienne]
+,,,yes_no,,114158,Photophobia [fr:Photophobie]
+
+,,Coloration [fr:Coloration cutaneo-muqueux]
+,,,yes_no,,5245,Pallor [fr:Pâleur]
+,,,yes_no,,136443,Jaundice [fr:Jaunesse]
+,,,yes_no,,143050,Cyanosis [fr:Cyanose]
+
+,,Neuro
+,,,yes_no,,118299,Agitation [fr:Agitation]
+,,,yes_no,,120345,Confusion [fr:Confusion]
+,,,yes_no,,206,Seizures [fr:Crise convulsive]
+,,,yes_no,,144576,Coma [fr:Coma]
+
+,,Bleeding [fr:Saignement]
+,,,yes_no,,517,Conjunctival injection [fr:Injection conjonctive]
+,,,yes_no,,147230,Gingival [fr:Gingivale]
+,,,yes_no,,133499,Epistaxis [fr:Epistaxie]
+,,,yes_no,,138905,Hemoptysis [fr:Hemoptysie]
+,,,yes_no,,139006,Hematemesis [fr:Hematemesie]
+,,,yes_no,,134394,Melaena [fr:Melena]
+,,,yes_no,,127854,Rectal [fr:Rectorragie]
+,,,yes_no,,840,Hematuria [fr:Hématurie]
+,,,yes_no,,147232,Vaginal [fr:Vaginal]
+,,,yes_no,,150341,Injection site [fr:Site d'injection]
+,,,yes_no,,130324,Petechiae [fr:Pétéchies]
+
+,,Respiratory [fr:Respiratoire]
+,,,select_one,,900038,Respiration [fr:Respiration]
+
+,,Circulation [fr:Circulation]
+,,,yes_no,,124823,Weak pulse [fr:Pouls faible]
+,,,yes_no,,128094,Fast pulse [fr:Pouls rapide]
+,,,yes_no,,128093,Slow pulse [fr:Pouls lent]
+,,,yes_no,,162510,Cold extremities [fr:Extrémités froides]]
+
+,,Abdomen 
+,,,yes_no,,159486,Soft [fr:Mou]
+,,,yes_no,,150915,Distended [fr:Distendu]
+,,,yes_no,,151,Painful [fr:Douloureux]
+,,,yes_no,,5008,Hepatomegaly [fr:Héptomegalie]
+,,,yes_no,,5009,Splenomegaly [fr:Splénomegalie]
+
+,,Evaluation [fr:Évaluation]
+,,,select_one,,900019,Category [fr:Catégorie]
+,,,select_one,,900018,Condition [fr:Condition]
+,,,text,,162169,Comments [fr:Commentaires]
 
