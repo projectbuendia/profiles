@@ -22,10 +22,6 @@ form,[1] Admission
 ,,,,,,,159392,C. Confirmed [fr:C. Confirmé]
 ,,,,,,,119844,Con. Convalescent [fr:Con. Convalescence]
 
-,,Returning patient [fr:Patient revenant]
-,,,date,,900006,Date of previous discharge [fr:Date de sortie précédente]
-,,,date,,900007,Date of last PCR test [fr:Date du dernier test PCR]
-
 ,,Transport
 ,,,text,,162721,Health area where patient became ill [fr:Aire de santé où le patient a tombé malade]
 ,,,text,,1673,Health area patient transported from [fr:Aire de santé d'où le patient était transporté]
@@ -51,6 +47,12 @@ form,[1] Admission
 ,,Medical attributes [fr:Attributs médicaux]
 ,,,yes_no,,900012,IV access present [fr:Acces IV est présent]
 ,,,yes_no,,162738,Oxygen mask in use [fr:Mask d'oxygène en usage]
+
+
+form,[1a] Returning patient [fr:Patient revenant]
+,,Returning patient [fr:Patient revenant]
+,,,date,,900006,Date of previous discharge [fr:Date de sortie précédente]
+,,,date,,900007,Date of last PCR test [fr:Date du dernier test PCR]
 
 
 form,[2] Accompanying person [fr:Accompagnant]
@@ -299,7 +301,6 @@ form,[8] Discharge [fr:Sortie]
 
 chart,Chart
 ,,[[fixed]]
-,,,text,,1640,Admitted [fr:Admission],,,,,,"Day {1,day_number,#} [fr:Jour {1,day_number,#}]"
-,,,text,,1730,Symptoms [fr:Symptômes],,,,,,"{1,day_number,#} {1,select,=:;=0:day;days} [fr:{1,day_number,#} {1,select,=:;=0:jour;jours}]"
+,,,text,,1640,Admitted [fr:Admission],,,,,,"Day {1,day_number,#}[fr:Jour {1,day_number,#}]","{1,time,yyyy-MM-dd HH:mm:ss}"
+,,,text,,1730,Symptoms [fr:Symptômes],,,,,,"Symp {1,day_number,#}","{1,time,yyyy-MM-dd HH:mm:ss}"
 ,,,text,,buendia_concept_placement,Location [fr:Emplacement],,,,,,"{1,location}","{2,select,=:;Lit {2,text}}"
-,,,text,,900019,Category [fr:Catégorie],,,,,,"{1,select,1065:Green;1066:Yellow;1067:Red} [fr:{1,select,1065:Vert;1066:Jaune;1067:Rouge}]",,{1,select,1065:green;1066:yellow;1067:red}
